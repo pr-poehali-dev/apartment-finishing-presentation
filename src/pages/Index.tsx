@@ -417,102 +417,74 @@ export default function Index() {
             </div>
           </Section>
           <Section>
-            {/* ── ОБЪЕКТ 1 ── */}
-            <div className="mb-3">
-              <div className="flex items-center gap-4 mb-3">
-                <div className="w-5 h-px bg-[#9A9A96]" />
-                <p className="text-[#E8E4DE] text-sm font-medium">СПА-комплекс частного дома · Горячий Ключ</p>
-              </div>
-              {/* Объект 1 — строка 1 */}
-              <div className="grid md:grid-cols-3 gap-1 mb-1">
-                <div className="md:col-span-2 aspect-[16/9]"><PhotoItem src={IMG_POOL} label="Бассейн" onClick={() => openLightbox(0)} /></div>
-                <div className="aspect-[16/9]"><PhotoItem src={IMG_BATHROOM} label="Ванная" onClick={() => openLightbox(1)} /></div>
-              </div>
-              {/* Объект 1 — строка 2 */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-1 mb-1">
-                <div className="aspect-[4/3]"><PhotoItem src={IMG_FACADE_1} label="Фасад" onClick={() => openLightbox(2)} /></div>
-                <div className="aspect-[4/3]"><PhotoItem src={IMG_FACADE_2} label="Терраса" onClick={() => openLightbox(3)} /></div>
-                <div className="aspect-[4/3]"><PhotoItem src={IMG_OBJ1_GYM} label="Фитнес-зал" onClick={() => openLightbox(4)} /></div>
-                <div className="aspect-[4/3]"><PhotoItem src={IMG_OBJ1_HAMMAM} label="Хаммам" onClick={() => openLightbox(5)} /></div>
-              </div>
-              {/* Объект 1 — кухня */}
-              <div className="aspect-[21/9]"><PhotoItem src={IMG_KITCHEN} label="Кухня-столовая" onClick={() => openLightbox(6)} /></div>
-            </div>
+            {/* helper для единообразной ячейки */}
+            {(() => {
+              const P = ({ src, label, idx }: { src: string; label: string; idx: number }) => (
+                <div className="aspect-[4/3]"><PhotoItem src={src} label={label} onClick={() => openLightbox(idx)} /></div>
+              );
+              const PW = ({ src, label, idx }: { src: string; label: string; idx: number }) => (
+                <div className="aspect-[16/9] col-span-2"><PhotoItem src={src} label={label} onClick={() => openLightbox(idx)} /></div>
+              );
+              const Div = ({ title }: { title: string }) => (
+                <div className="col-span-full flex items-center gap-4 pt-2 pb-1">
+                  <div className="w-5 h-px bg-[#9A9A96]" />
+                  <p className="text-[#E8E4DE] text-sm font-medium">{title}</p>
+                </div>
+              );
+              const Sep = () => (
+                <div className="col-span-full flex items-center gap-4 my-6">
+                  <div className="flex-1 h-px bg-[#2A2825]" /><div className="w-1.5 h-1.5 bg-[#9A9A96] rotate-45" /><div className="flex-1 h-px bg-[#2A2825]" />
+                </div>
+              );
+              return (
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-1">
+                  <Div title="СПА-комплекс частного дома · Горячий Ключ" />
+                  <PW src={IMG_POOL} label="Бассейн" idx={0} />
+                  <P src={IMG_BATHROOM} label="Ванная" idx={1} />
+                  <P src={IMG_FACADE_2} label="Терраса" idx={3} />
+                  <P src={IMG_FACADE_1} label="Фасад" idx={2} />
+                  <P src={IMG_OBJ1_GYM} label="Фитнес-зал" idx={4} />
+                  <P src={IMG_OBJ1_HAMMAM} label="Хаммам" idx={5} />
+                  <PW src={IMG_KITCHEN} label="Кухня-столовая" idx={6} />
 
-            {/* Разделитель */}
-            <div className="flex items-center gap-4 my-8">
-              <div className="flex-1 h-px bg-[#2A2825]" /><div className="w-1.5 h-1.5 bg-[#9A9A96] rotate-45" /><div className="flex-1 h-px bg-[#2A2825]" />
-            </div>
+                  <Sep />
 
-            {/* ── ОБЪЕКТ 2 ── */}
-            <div className="flex items-center gap-4 mb-3">
-              <div className="w-5 h-px bg-[#9A9A96]" />
-              <p className="text-[#E8E4DE] text-sm font-medium">Частный дом · пос. Северный, Краснодар</p>
-            </div>
-            <div className="grid md:grid-cols-3 gap-1 mb-1">
-              <div className="md:col-span-2 aspect-[16/9]"><PhotoItem src={IMG_OBJ2_HALL} label="Коридор" onClick={() => openLightbox(7)} /></div>
-              <div className="aspect-[16/9]"><PhotoItem src={IMG_OBJ2_LIVING} label="Гостиная" onClick={() => openLightbox(8)} /></div>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-1 mb-1">
-              <div className="aspect-[4/3]"><PhotoItem src={IMG_ARCH} label="Столовая" onClick={() => openLightbox(9)} /></div>
-              <div className="aspect-[4/3]"><PhotoItem src={IMG_OBJ2_KITCHEN} label="Кухня" onClick={() => openLightbox(10)} /></div>
-              <div className="aspect-[4/3]"><PhotoItem src={IMG_BATH_GOLD} label="Ванная" onClick={() => openLightbox(11)} /></div>
-              <div className="aspect-[4/3]"><PhotoItem src={IMG_OBJ2_BATH} label="Санузел" onClick={() => openLightbox(12)} /></div>
-            </div>
-            <div className="grid md:grid-cols-3 gap-1">
-              <div className="aspect-[4/3]"><PhotoItem src={IMG_OBJ2_BED1} label="Спальня" onClick={() => openLightbox(13)} /></div>
-              <div className="aspect-[4/3]"><PhotoItem src={IMG_OBJ2_BED2} label="Спальня" onClick={() => openLightbox(14)} /></div>
-              <div className="aspect-[4/3]"><PhotoItem src={IMG_BEDROOM} label="Спальня" onClick={() => openLightbox(15)} /></div>
-            </div>
+                  <Div title="Частный дом · пос. Северный, Краснодар" />
+                  <PW src={IMG_OBJ2_HALL} label="Коридор" idx={7} />
+                  <P src={IMG_OBJ2_LIVING} label="Гостиная" idx={8} />
+                  <P src={IMG_ARCH} label="Столовая" idx={9} />
+                  <P src={IMG_OBJ2_KITCHEN} label="Кухня" idx={10} />
+                  <P src={IMG_BATH_GOLD} label="Ванная" idx={11} />
+                  <P src={IMG_OBJ2_BATH} label="Санузел" idx={12} />
+                  <P src={IMG_OBJ2_BED1} label="Спальня" idx={13} />
+                  <P src={IMG_OBJ2_BED2} label="Спальня" idx={14} />
+                  <P src={IMG_BEDROOM} label="Спальня" idx={15} />
 
-            {/* Разделитель */}
-            <div className="flex items-center gap-4 my-8">
-              <div className="flex-1 h-px bg-[#2A2825]" /><div className="w-1.5 h-1.5 bg-[#9A9A96] rotate-45" /><div className="flex-1 h-px bg-[#2A2825]" />
-            </div>
+                  <Sep />
 
-            {/* ── ОБЪЕКТ 3 ── */}
-            <div className="flex items-center gap-4 mb-3">
-              <div className="w-5 h-px bg-[#9A9A96]" />
-              <p className="text-[#E8E4DE] text-sm font-medium">Частный дом · ФМР, Краснодар</p>
-            </div>
-            <div className="grid md:grid-cols-3 gap-1 mb-1">
-              <div className="md:col-span-2 aspect-[16/9]"><PhotoItem src={IMG_OBJ3_POOL} label="Бассейн" onClick={() => openLightbox(16)} /></div>
-              <div className="aspect-[16/9]"><PhotoItem src={IMG_OBJ3_LIVING} label="Гостиная" onClick={() => openLightbox(17)} /></div>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-1 mb-1">
-              <div className="aspect-square"><PhotoItem src={IMG_OBJ3_KITCHEN} label="Кухня" onClick={() => openLightbox(18)} /></div>
-              <div className="aspect-square"><PhotoItem src={IMG_OBJ3_WARDROBE} label="Гардеробная" onClick={() => openLightbox(19)} /></div>
-              <div className="aspect-square"><PhotoItem src={IMG_OBJ3_TROPIC} label="Ванная" onClick={() => openLightbox(20)} /></div>
-              <div className="aspect-square"><PhotoItem src={IMG_OBJ3_BATH_YELLOW} label="Санузел" onClick={() => openLightbox(21)} /></div>
-            </div>
-            <div className="grid md:grid-cols-2 gap-1">
-              <div className="aspect-[4/3]"><PhotoItem src={IMG_OBJ3_BEDROOM} label="Спальня" onClick={() => openLightbox(22)} /></div>
-              <div className="aspect-[4/3]"><PhotoItem src={IMG_OBJ3_OFFICE} label="Кабинет" onClick={() => openLightbox(23)} /></div>
-            </div>
+                  <Div title="Частный дом · ФМР, Краснодар" />
+                  <PW src={IMG_OBJ3_POOL} label="Бассейн" idx={16} />
+                  <P src={IMG_OBJ3_LIVING} label="Гостиная" idx={17} />
+                  <P src={IMG_OBJ3_KITCHEN} label="Кухня" idx={18} />
+                  <P src={IMG_OBJ3_WARDROBE} label="Гардеробная" idx={19} />
+                  <P src={IMG_OBJ3_TROPIC} label="Ванная" idx={20} />
+                  <P src={IMG_OBJ3_BATH_YELLOW} label="Санузел" idx={21} />
+                  <PW src={IMG_OBJ3_BEDROOM} label="Спальня" idx={22} />
+                  <P src={IMG_OBJ3_OFFICE} label="Кабинет" idx={23} />
 
-            {/* Разделитель */}
-            <div className="flex items-center gap-4 my-8">
-              <div className="flex-1 h-px bg-[#2A2825]" /><div className="w-1.5 h-1.5 bg-[#9A9A96] rotate-45" /><div className="flex-1 h-px bg-[#2A2825]" />
-            </div>
+                  <Sep />
 
-            {/* ── ОБЪЕКТ 4 ── */}
-            <div className="flex items-center gap-4 mb-3">
-              <div className="w-5 h-px bg-[#9A9A96]" />
-              <p className="text-[#E8E4DE] text-sm font-medium">Пристройка: комната отдыха, русская баня и бассейн</p>
-            </div>
-            <div className="grid md:grid-cols-3 gap-1 mb-1">
-              <div className="md:col-span-2 aspect-[16/9]"><PhotoItem src={IMG_OBJ4_FACADE} label="Фасад" onClick={() => openLightbox(24)} /></div>
-              <div className="aspect-[16/9]"><PhotoItem src={IMG_OBJ4_POOL} label="Бассейн" onClick={() => openLightbox(25)} /></div>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-1 mb-1">
-              <div className="aspect-[4/3]"><PhotoItem src={IMG_OBJ4_LIVING} label="Гостиная" onClick={() => openLightbox(26)} /></div>
-              <div className="aspect-[4/3]"><PhotoItem src={IMG_OBJ4_DINING} label="Столовая" onClick={() => openLightbox(27)} /></div>
-              <div className="aspect-[4/3]"><PhotoItem src={IMG_OBJ4_SAUNA} label="Баня" onClick={() => openLightbox(28)} /></div>
-              <div className="aspect-[4/3]"><PhotoItem src={IMG_OBJ4_STOVE} label="Печь" onClick={() => openLightbox(29)} /></div>
-            </div>
-            <div className="grid md:grid-cols-1 gap-1">
-              <div className="aspect-[21/9]"><PhotoItem src={IMG_OBJ4_BATH} label="Санузел" onClick={() => openLightbox(30)} /></div>
-            </div>
+                  <Div title="Пристройка: комната отдыха, русская баня и бассейн" />
+                  <PW src={IMG_OBJ4_FACADE} label="Фасад" idx={24} />
+                  <P src={IMG_OBJ4_POOL} label="Бассейн" idx={25} />
+                  <P src={IMG_OBJ4_LIVING} label="Гостиная" idx={26} />
+                  <P src={IMG_OBJ4_DINING} label="Столовая" idx={27} />
+                  <P src={IMG_OBJ4_SAUNA} label="Баня" idx={28} />
+                  <P src={IMG_OBJ4_STOVE} label="Печь" idx={29} />
+                  <PW src={IMG_OBJ4_BATH} label="Санузел" idx={30} />
+                </div>
+              );
+            })()}
           </Section>
         </div>
       </section>
