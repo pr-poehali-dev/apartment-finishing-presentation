@@ -18,6 +18,22 @@ const IMG_ARCH = "https://cdn.poehali.dev/files/6f0e69bb-ea97-4afb-86fd-f2d41141
 const IMG_BATH_GOLD = "https://cdn.poehali.dev/files/3a501fc3-488b-4415-a059-4acc09f6fc7a.png";
 // Объект 4 — спальня с лепниной
 const IMG_BEDROOM = "https://cdn.poehali.dev/files/beba225e-1d85-45ae-9a36-e67d73087bb8.png";
+// Объект 3 — ванная с жёлтой тумбой
+const IMG_OBJ3_BATH_YELLOW = "https://cdn.poehali.dev/files/cd061662-3db4-4f2c-85d6-ecc2c0fce233.png";
+// Объект 3 — белая кухня с золотыми витринами
+const IMG_OBJ3_KITCHEN = "https://cdn.poehali.dev/files/89908ee1-c186-4be8-a4da-7c1b2e7d386f.png";
+// Объект 3 — спальня с птицами на стене
+const IMG_OBJ3_BEDROOM = "https://cdn.poehali.dev/files/eef02bab-df02-413a-9656-eaebaf3991da.png";
+// Объект 3 — бассейн с мраморной стеной
+const IMG_OBJ3_POOL = "https://cdn.poehali.dev/files/9e431920-20d4-4579-8c00-182d2be0925a.png";
+// Объект 3 — ванная тропик с розовой аркой
+const IMG_OBJ3_TROPIC = "https://cdn.poehali.dev/files/3ec60242-d3db-4965-b426-0fd83edb3aa9.png";
+// Объект 3 — гардеробная с витражным окном
+const IMG_OBJ3_WARDROBE = "https://cdn.poehali.dev/files/418713a4-b5fc-4272-b8ad-0284c09cdca3.png";
+// Объект 3 — гостиная с камином
+const IMG_OBJ3_LIVING = "https://cdn.poehali.dev/files/53e063a6-d321-49ef-b915-0cf4df28a919.png";
+// Объект 3 — кабинет с диваном
+const IMG_OBJ3_OFFICE = "https://cdn.poehali.dev/files/a7e87048-59ec-46aa-a644-8569dd9e111b.png";
 const LOGO_WHITE = "https://cdn.poehali.dev/projects/830044c3-63d5-4b40-9cea-c9639af22500/bucket/55e40c34-2198-4782-8615-21b1fb699e9b.png";
 
 function useInView(threshold = 0.12) {
@@ -295,27 +311,80 @@ export default function Index() {
               <p className="text-xs tracking-[0.25em] uppercase text-[#3A3835]">Объект 2</p>
               <div className="flex-1 h-px bg-[#2A2825]" />
             </div>
-            {/* Строка 3: объект 2 — большое фото арки + два маленьких */}
-            <div className="grid md:grid-cols-3 gap-1">
-              <div className="md:col-span-1 aspect-[4/3] overflow-hidden relative">
-                <img src={IMG_ARCH} alt="Арка в столовую" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
+            {/* Объект 2 — три фото */}
+            <div className="grid md:grid-cols-3 gap-1 mb-1">
+              {[
+                { src: IMG_ARCH, alt: "Столовая", label: "Столовая" },
+                { src: IMG_BATH_GOLD, alt: "Ванная с золотом", label: "Ванная" },
+                { src: IMG_BEDROOM, alt: "Спальня", label: "Спальня" },
+              ].map((item) => (
+                <div key={item.alt} className="aspect-[4/3] overflow-hidden relative">
+                  <img src={item.src} alt={item.alt} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
+                  <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
+                  <div className="absolute bottom-4 left-4 bg-[#111110]/80 px-3 py-1.5">
+                    <p className="text-xs tracking-widest uppercase text-[#9A9A96]">{item.label}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Разделитель объект 3 */}
+            <div className="flex items-center gap-4 my-6">
+              <div className="flex-1 h-px bg-[#2A2825]" />
+              <p className="text-xs tracking-[0.25em] uppercase text-[#3A3835]">Объект 3</p>
+              <div className="flex-1 h-px bg-[#2A2825]" />
+            </div>
+
+            {/* Объект 3 — строка 1: бассейн широко + гостиная */}
+            <div className="grid md:grid-cols-3 gap-1 mb-1">
+              <div className="md:col-span-2 aspect-[16/9] overflow-hidden relative">
+                <img src={IMG_OBJ3_POOL} alt="Бассейн с мрамором" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
                 <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
                 <div className="absolute bottom-4 left-4 bg-[#111110]/80 px-3 py-1.5">
-                  <p className="text-xs tracking-widest uppercase text-[#9A9A96]">Столовая</p>
+                  <p className="text-xs tracking-widest uppercase text-[#9A9A96]">Бассейн</p>
                 </div>
               </div>
-              <div className="aspect-[4/3] overflow-hidden relative">
-                <img src={IMG_BATH_GOLD} alt="Ванная с золотом" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
+              <div className="aspect-[16/9] md:aspect-auto overflow-hidden relative">
+                <img src={IMG_OBJ3_LIVING} alt="Гостиная с камином" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
                 <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
                 <div className="absolute bottom-4 left-4 bg-[#111110]/80 px-3 py-1.5">
-                  <p className="text-xs tracking-widest uppercase text-[#9A9A96]">Ванная</p>
+                  <p className="text-xs tracking-widest uppercase text-[#9A9A96]">Гостиная</p>
                 </div>
               </div>
+            </div>
+
+            {/* Объект 3 — строка 2: 4 фото равными */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-1">
+              {[
+                { src: IMG_OBJ3_KITCHEN, label: "Кухня" },
+                { src: IMG_OBJ3_WARDROBE, label: "Гардеробная" },
+                { src: IMG_OBJ3_TROPIC, label: "Ванная" },
+                { src: IMG_OBJ3_BATH_YELLOW, label: "Санузел" },
+              ].map((item) => (
+                <div key={item.label} className="aspect-square overflow-hidden relative">
+                  <img src={item.src} alt={item.label} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
+                  <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
+                  <div className="absolute bottom-3 left-3 bg-[#111110]/80 px-2 py-1">
+                    <p className="text-xs tracking-widest uppercase text-[#9A9A96]">{item.label}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Объект 3 — строка 3: спальня + кабинет */}
+            <div className="grid md:grid-cols-2 gap-1 mt-1">
               <div className="aspect-[4/3] overflow-hidden relative">
-                <img src={IMG_BEDROOM} alt="Спальня" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
+                <img src={IMG_OBJ3_BEDROOM} alt="Спальня с птицами" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
                 <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
                 <div className="absolute bottom-4 left-4 bg-[#111110]/80 px-3 py-1.5">
                   <p className="text-xs tracking-widest uppercase text-[#9A9A96]">Спальня</p>
+                </div>
+              </div>
+              <div className="aspect-[4/3] overflow-hidden relative">
+                <img src={IMG_OBJ3_OFFICE} alt="Кабинет" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
+                <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
+                <div className="absolute bottom-4 left-4 bg-[#111110]/80 px-3 py-1.5">
+                  <p className="text-xs tracking-widest uppercase text-[#9A9A96]">Кабинет</p>
                 </div>
               </div>
             </div>
