@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Icon from "@/components/ui/icon";
 
-const ACCENT = "#7B9BAA";
+const ACCENT = "#9A9A96";
 const PORTFOLIO_IMAGE = "https://cdn.poehali.dev/projects/830044c3-63d5-4b40-9cea-c9639af22500/files/cd732ccd-02f4-47e0-a72b-4c98ea214f6d.jpg";
 const LOGO_WHITE = "https://cdn.poehali.dev/projects/830044c3-63d5-4b40-9cea-c9639af22500/bucket/55e40c34-2198-4782-8615-21b1fb699e9b.png";
 
@@ -107,12 +107,12 @@ export default function Index() {
         <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center py-16 relative z-10">
           <div>
             <div className="flex items-center gap-3 mb-8 animate-fade-in">
-              <div className="w-8 h-px bg-[#7B9BAA]" />
-              <p className="text-xs tracking-[0.3em] uppercase text-[#7B9BAA]">Строительная компания — Краснодар</p>
+              <div className="w-8 h-px bg-[#9A9A96]" />
+              <p className="text-xs tracking-[0.3em] uppercase text-[#9A9A96]">Строительная компания — Краснодар</p>
             </div>
             <h1 className="font-golos text-[clamp(2.8rem,7vw,6.5rem)] font-medium leading-[0.88] mb-8 animate-fade-in uppercase tracking-tight" style={{ animationDelay: "0.1s" }}>
               Строим.<br />
-              <span className="text-[#7B9BAA]">Отделываем.</span><br />
+              <span className="text-[#9A9A96]">Отделываем.</span><br />
               Сдаём.
             </h1>
             <p className="text-[#6B6560] text-base leading-relaxed max-w-sm mb-10 animate-fade-in font-light" style={{ animationDelay: "0.2s" }}>
@@ -121,13 +121,13 @@ export default function Index() {
             <div className="flex gap-4 animate-fade-in" style={{ animationDelay: "0.3s" }}>
               <button
                 onClick={() => scrollTo("contacts")}
-                className="bg-[#7B9BAA] text-[#111110] px-8 py-3.5 text-xs tracking-[0.2em] uppercase font-medium hover:bg-[#8EAEBB] transition-colors duration-300"
+                className="bg-[#9A9A96] text-[#111110] px-8 py-3.5 text-xs tracking-[0.2em] uppercase font-medium hover:bg-[#ADADAA] transition-colors duration-300"
               >
                 Связаться
               </button>
               <button
                 onClick={() => scrollTo("portfolio")}
-                className="border border-[#2A2825] text-[#E8E4DE] px-8 py-3.5 text-xs tracking-[0.2em] uppercase hover:border-[#7B9BAA] hover:text-[#7B9BAA] transition-colors duration-300"
+                className="border border-[#2A2825] text-[#E8E4DE] px-8 py-3.5 text-xs tracking-[0.2em] uppercase hover:border-[#9A9A96] hover:text-[#9A9A96] transition-colors duration-300"
               >
                 Портфолио
               </button>
@@ -139,12 +139,12 @@ export default function Index() {
               {/* металлическая рамка */}
               <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
             </div>
-            <div className="absolute -bottom-4 -left-4 bg-[#7B9BAA] text-[#111110] p-5">
+            <div className="absolute -bottom-4 -left-4 bg-[#9A9A96] text-[#111110] p-5">
               <p className="font-golos text-4xl font-bold">500+</p>
               <p className="text-xs tracking-[0.15em] uppercase mt-1 font-medium">Проектов</p>
             </div>
             {/* декоративный угол */}
-            <div className="absolute -top-3 -right-3 w-12 h-12 border-t-2 border-r-2 border-[#7B9BAA]" />
+            <div className="absolute -top-3 -right-3 w-12 h-12 border-t-2 border-r-2 border-[#9A9A96]" />
           </div>
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-px bg-[#2A2825]" />
@@ -157,10 +157,10 @@ export default function Index() {
             <div className="grid md:grid-cols-[1fr_2fr] gap-16 items-start">
               <div>
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-5 h-px bg-[#7B9BAA]" />
-                  <p className="text-xs tracking-[0.25em] uppercase text-[#7B9BAA]">О компании</p>
+                  <div className="w-5 h-px bg-[#9A9A96]" />
+                  <p className="text-xs tracking-[0.25em] uppercase text-[#9A9A96]">О компании</p>
                 </div>
-                <h2 className="font-golos text-5xl font-bold uppercase leading-tight">История<br /><span className="text-[#7B9BAA]">и опыт</span></h2>
+                <h2 className="font-golos text-5xl font-bold uppercase leading-tight">История<br /><span className="text-[#9A9A96]">и опыт</span></h2>
               </div>
               <div className="grid md:grid-cols-2 gap-10">
                 <div>
@@ -173,7 +173,7 @@ export default function Index() {
                     Наша миссия — создавать пространства, в которых хочется жить и работать. Мы убеждены, что качественное строительство — это не роскошь, а стандарт. Каждый объект ведём с той же ответственностью, что и первый.
                   </p>
                 </div>
-                <div className="border-l-2 border-[#7B9BAA] pl-4">
+                <div className="border-l-2 border-[#9A9A96] pl-4">
                   <p className="font-golos text-4xl font-bold text-[#E8E4DE]">10+</p>
                   <p className="text-xs tracking-widest uppercase text-[#6B6560] mt-1">лет на рынке</p>
                 </div>
@@ -194,8 +194,8 @@ export default function Index() {
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
               <div>
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-5 h-px bg-[#7B9BAA]" />
-                  <p className="text-xs tracking-[0.25em] uppercase text-[#7B9BAA]">Что мы делаем</p>
+                  <div className="w-5 h-px bg-[#9A9A96]" />
+                  <p className="text-xs tracking-[0.25em] uppercase text-[#9A9A96]">Что мы делаем</p>
                 </div>
                 <h2 className="font-golos text-5xl font-bold uppercase">Услуги</h2>
               </div>
@@ -208,7 +208,7 @@ export default function Index() {
             {services.map((s, i) => (
               <Section key={i}>
                 <div className="bg-[#161513] p-8 hover:bg-[#1E1C1A] transition-colors duration-300 group h-full">
-                  <p className="font-golos text-5xl font-bold text-[#2A2825] group-hover:text-[#7B9BAA] transition-colors duration-300 mb-5">{s.num}</p>
+                  <p className="font-golos text-5xl font-bold text-[#2A2825] group-hover:text-[#9A9A96] transition-colors duration-300 mb-5">{s.num}</p>
                   <h3 className="text-sm font-medium tracking-widest uppercase mb-3 text-[#E8E4DE]">{s.title}</h3>
                   <p className="text-sm text-[#6B6560] leading-relaxed font-light">{s.desc}</p>
                 </div>
@@ -225,8 +225,8 @@ export default function Index() {
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
               <div>
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-5 h-px bg-[#7B9BAA]" />
-                  <p className="text-xs tracking-[0.25em] uppercase text-[#7B9BAA]">Наши работы</p>
+                  <div className="w-5 h-px bg-[#9A9A96]" />
+                  <p className="text-xs tracking-[0.25em] uppercase text-[#9A9A96]">Наши работы</p>
                 </div>
                 <h2 className="font-golos text-5xl font-bold uppercase">Портфолио</h2>
               </div>
@@ -243,7 +243,7 @@ export default function Index() {
                   <img src={PORTFOLIO_IMAGE} alt="Проект 2" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
                   <div className="absolute inset-0 border border-[#2A2825]" />
                 </div>
-                <div className="aspect-square bg-[#7B9BAA] flex flex-col items-center justify-center p-6 text-center">
+                <div className="aspect-square bg-[#9A9A96] flex flex-col items-center justify-center p-6 text-center">
                   <p className="font-golos text-4xl text-[#111110] font-bold">500+</p>
                   <p className="text-xs tracking-[0.15em] uppercase text-[#111110]/70 mt-2 font-medium">объектов<br />завершено</p>
                 </div>
@@ -260,8 +260,8 @@ export default function Index() {
           <Section>
             <div className="mb-16">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-5 h-px bg-[#7B9BAA]" />
-                <p className="text-xs tracking-[0.25em] uppercase text-[#7B9BAA]">Почему выбирают нас</p>
+                <div className="w-5 h-px bg-[#9A9A96]" />
+                <p className="text-xs tracking-[0.25em] uppercase text-[#9A9A96]">Почему выбирают нас</p>
               </div>
               <h2 className="font-golos text-5xl font-bold uppercase text-[#E8E4DE]">Преимущества</h2>
             </div>
@@ -269,9 +269,9 @@ export default function Index() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {advantages.map((a, i) => (
               <Section key={i}>
-                <div className="border-t border-[#2A2825] pt-6 group hover:border-[#7B9BAA] transition-colors duration-300">
-                  <div className="w-10 h-10 border border-[#2A2825] group-hover:border-[#7B9BAA] flex items-center justify-center mb-5 transition-colors duration-300">
-                    <Icon name={a.icon as "Award"} size={16} className="text-[#7B9BAA]" />
+                <div className="border-t border-[#2A2825] pt-6 group hover:border-[#9A9A96] transition-colors duration-300">
+                  <div className="w-10 h-10 border border-[#2A2825] group-hover:border-[#9A9A96] flex items-center justify-center mb-5 transition-colors duration-300">
+                    <Icon name={a.icon as "Award"} size={16} className="text-[#9A9A96]" />
                   </div>
                   <h3 className="text-[#E8E4DE] font-medium tracking-wide mb-2 text-sm uppercase">{a.title}</h3>
                   <p className="text-[#6B6560] text-sm leading-relaxed font-light">{a.desc}</p>
@@ -288,8 +288,8 @@ export default function Index() {
           <Section>
             <div className="mb-16">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-5 h-px bg-[#7B9BAA]" />
-                <p className="text-xs tracking-[0.25em] uppercase text-[#7B9BAA]">Как мы работаем</p>
+                <div className="w-5 h-px bg-[#9A9A96]" />
+                <p className="text-xs tracking-[0.25em] uppercase text-[#9A9A96]">Как мы работаем</p>
               </div>
               <h2 className="font-golos text-5xl font-bold uppercase">Процесс</h2>
             </div>
@@ -298,7 +298,7 @@ export default function Index() {
             {steps.map((s, i) => (
               <Section key={i}>
                 <div className="bg-[#111110] grid md:grid-cols-[100px_1fr_2fr] gap-6 items-center px-8 py-7 hover:bg-[#161513] transition-colors duration-300 group">
-                  <p className="font-golos text-5xl font-bold text-[#2A2825] group-hover:text-[#7B9BAA] transition-colors duration-300">{s.step}</p>
+                  <p className="font-golos text-5xl font-bold text-[#2A2825] group-hover:text-[#9A9A96] transition-colors duration-300">{s.step}</p>
                   <h3 className="font-medium text-sm tracking-widest uppercase text-[#E8E4DE]">{s.title}</h3>
                   <p className="text-[#6B6560] text-sm font-light leading-relaxed">{s.desc}</p>
                 </div>
@@ -315,8 +315,8 @@ export default function Index() {
             <div className="grid md:grid-cols-2 gap-16 items-start">
               <div>
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-5 h-px bg-[#7B9BAA]" />
-                  <p className="text-xs tracking-[0.25em] uppercase text-[#7B9BAA]">Свяжитесь с нами</p>
+                  <div className="w-5 h-px bg-[#9A9A96]" />
+                  <p className="text-xs tracking-[0.25em] uppercase text-[#9A9A96]">Свяжитесь с нами</p>
                 </div>
                 <h2 className="font-golos text-5xl font-bold uppercase mb-10">Контакты</h2>
                 <div className="space-y-6">
@@ -327,12 +327,12 @@ export default function Index() {
                   ].map((c) => (
                     <div key={c.label} className="flex items-start gap-4 border-b border-[#2A2825] pb-6">
                       <div className="w-9 h-9 border border-[#2A2825] flex items-center justify-center shrink-0 mt-0.5">
-                        <Icon name={c.icon as "Phone"} size={14} className="text-[#7B9BAA]" />
+                        <Icon name={c.icon as "Phone"} size={14} className="text-[#9A9A96]" />
                       </div>
                       <div>
                         <p className="text-xs tracking-widest uppercase text-[#6B6560] mb-1">{c.label}</p>
                         {c.href ? (
-                          <a href={c.href} className="text-[#E8E4DE] font-light hover:text-[#7B9BAA] transition-colors">{c.value}</a>
+                          <a href={c.href} className="text-[#E8E4DE] font-light hover:text-[#9A9A96] transition-colors">{c.value}</a>
                         ) : (
                           <p className="text-[#E8E4DE] font-light">{c.value}</p>
                         )}
@@ -342,11 +342,11 @@ export default function Index() {
                 </div>
                 <div className="flex gap-3 mt-8">
                   <a href="https://t.me/+79649004466" target="_blank" rel="noopener noreferrer"
-                    className="border border-[#2A2825] text-[#E8E4DE] px-4 py-2 text-xs tracking-widest uppercase hover:bg-[#7B9BAA] hover:text-[#111110] hover:border-[#7B9BAA] transition-all duration-300">
+                    className="border border-[#2A2825] text-[#E8E4DE] px-4 py-2 text-xs tracking-widest uppercase hover:bg-[#9A9A96] hover:text-[#111110] hover:border-[#9A9A96] transition-all duration-300">
                     Telegram
                   </a>
                   <a href="https://instagram.com/lednev_sk" target="_blank" rel="noopener noreferrer"
-                    className="border border-[#2A2825] text-[#E8E4DE] px-4 py-2 text-xs tracking-widest uppercase hover:bg-[#7B9BAA] hover:text-[#111110] hover:border-[#7B9BAA] transition-all duration-300">
+                    className="border border-[#2A2825] text-[#E8E4DE] px-4 py-2 text-xs tracking-widest uppercase hover:bg-[#9A9A96] hover:text-[#111110] hover:border-[#9A9A96] transition-all duration-300">
                     Instagram
                   </a>
                 </div>
@@ -354,28 +354,28 @@ export default function Index() {
 
               <div className="border border-[#2A2825] p-10 relative">
                 {/* угловой акцент */}
-                <div className="absolute -top-px -right-px w-12 h-12 border-t-2 border-r-2 border-[#7B9BAA]" />
-                <div className="absolute -bottom-px -left-px w-12 h-12 border-b-2 border-l-2 border-[#7B9BAA]" />
+                <div className="absolute -top-px -right-px w-12 h-12 border-t-2 border-r-2 border-[#9A9A96]" />
+                <div className="absolute -bottom-px -left-px w-12 h-12 border-b-2 border-l-2 border-[#9A9A96]" />
                 <p className="font-golos text-2xl text-[#E8E4DE] font-bold uppercase mb-2">Обсудим проект?</p>
                 <p className="text-[#6B6560] text-sm font-light mb-8">Оставьте заявку — свяжемся в течение часа</p>
                 <div className="space-y-5">
                   <input
                     type="text"
                     placeholder="Ваше имя"
-                    className="w-full bg-transparent border-b border-[#2A2825] py-3 text-[#E8E4DE] placeholder-[#3A3835] text-sm focus:outline-none focus:border-[#7B9BAA] transition-colors font-golos font-light"
+                    className="w-full bg-transparent border-b border-[#2A2825] py-3 text-[#E8E4DE] placeholder-[#3A3835] text-sm focus:outline-none focus:border-[#9A9A96] transition-colors font-golos font-light"
                   />
                   <input
                     type="tel"
                     placeholder="Телефон"
-                    className="w-full bg-transparent border-b border-[#2A2825] py-3 text-[#E8E4DE] placeholder-[#3A3835] text-sm focus:outline-none focus:border-[#7B9BAA] transition-colors font-golos font-light"
+                    className="w-full bg-transparent border-b border-[#2A2825] py-3 text-[#E8E4DE] placeholder-[#3A3835] text-sm focus:outline-none focus:border-[#9A9A96] transition-colors font-golos font-light"
                   />
                   <textarea
                     placeholder="Описание объекта"
                     rows={3}
-                    className="w-full bg-transparent border-b border-[#2A2825] py-3 text-[#E8E4DE] placeholder-[#3A3835] text-sm focus:outline-none focus:border-[#7B9BAA] transition-colors resize-none font-golos font-light"
+                    className="w-full bg-transparent border-b border-[#2A2825] py-3 text-[#E8E4DE] placeholder-[#3A3835] text-sm focus:outline-none focus:border-[#9A9A96] transition-colors resize-none font-golos font-light"
                   />
                 </div>
-                <button className="mt-8 w-full bg-[#7B9BAA] text-[#111110] py-4 text-xs tracking-[0.25em] uppercase font-bold hover:bg-[#8EAEBB] transition-colors duration-300">
+                <button className="mt-8 w-full bg-[#9A9A96] text-[#111110] py-4 text-xs tracking-[0.25em] uppercase font-bold hover:bg-[#ADADAA] transition-colors duration-300">
                   Отправить заявку
                 </button>
               </div>
