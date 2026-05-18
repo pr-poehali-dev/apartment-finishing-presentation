@@ -220,6 +220,7 @@ function Lightbox({ images, index, onClose, onPrev, onNext }: {
 export default function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
   const [formName, setFormName] = useState("");
   const [formPhone, setFormPhone] = useState("");
   const [formDesc, setFormDesc] = useState("");
@@ -260,6 +261,57 @@ export default function Index() {
     <div className="bg-[#111110] text-[#E8E4DE] font-golos min-h-screen">
       {lightboxIndex !== null && (
         <Lightbox images={ALL_PORTFOLIO} index={lightboxIndex} onClose={closeLightbox} onPrev={prevPhoto} onNext={nextPhoto} />
+      )}
+
+      {/* Модальное окно — форма заявки */}
+      {modalOpen && (
+        <div className="fixed inset-0 z-[90] bg-black/80 flex items-center justify-center p-4" onClick={() => setModalOpen(false)}>
+          <div className="bg-[#161513] border border-[#2A2825] w-full max-w-md p-8 relative" onClick={e => e.stopPropagation()}>
+            <div className="absolute -top-px -right-px w-10 h-10 border-t-2 border-r-2 border-[#9A9A96]" />
+            <div className="absolute -bottom-px -left-px w-10 h-10 border-b-2 border-l-2 border-[#9A9A96]" />
+            <button className="absolute top-4 right-4 text-[#6B6560] hover:text-[#E8E4DE] transition-colors" onClick={() => setModalOpen(false)}>
+              <Icon name="X" size={18} />
+            </button>
+            <p className="font-golos text-xl text-[#E8E4DE] font-bold uppercase mb-1">Заказать проект</p>
+            <p className="text-[#6B6560] text-sm font-light mb-6">Оставьте заявку — свяжемся в течение часа</p>
+            <div className="space-y-4">
+              <input
+                type="text"
+                placeholder="Ваше имя"
+                value={formName}
+                onChange={e => setFormName(e.target.value)}
+                className="w-full bg-transparent border-b border-[#2A2825] py-3 text-[#E8E4DE] placeholder-[#3A3835] text-sm focus:outline-none focus:border-[#9A9A96] transition-colors font-golos font-light"
+              />
+              <input
+                type="tel"
+                placeholder="Телефон"
+                value={formPhone}
+                onChange={e => setFormPhone(e.target.value)}
+                className="w-full bg-transparent border-b border-[#2A2825] py-3 text-[#E8E4DE] placeholder-[#3A3835] text-sm focus:outline-none focus:border-[#9A9A96] transition-colors font-golos font-light"
+              />
+              <textarea
+                placeholder="Описание объекта"
+                rows={3}
+                value={formDesc}
+                onChange={e => setFormDesc(e.target.value)}
+                className="w-full bg-transparent border-b border-[#2A2825] py-3 text-[#E8E4DE] placeholder-[#3A3835] text-sm focus:outline-none focus:border-[#9A9A96] transition-colors resize-none font-golos font-light"
+              />
+            </div>
+            {formStatus === "ok" && (
+              <p className="mt-4 text-[#9A9A96] text-sm">✓ Заявка отправлена — свяжемся в ближайшее время</p>
+            )}
+            {formStatus === "error" && (
+              <p className="mt-4 text-red-400 text-sm">Ошибка. Позвоните нам напрямую.</p>
+            )}
+            <button
+              onClick={sendForm}
+              disabled={formStatus === "sending" || !formName.trim() || !formPhone.trim()}
+              className="mt-6 w-full bg-[#9A9A96] text-[#111110] py-3.5 text-xs tracking-[0.25em] uppercase font-bold hover:bg-[#ADADAA] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {formStatus === "sending" ? "Отправляем..." : "Отправить заявку"}
+            </button>
+          </div>
+        </div>
       )}
 
       {/* NAV */}
@@ -312,16 +364,16 @@ export default function Index() {
             <p className="text-[#6B6560] text-base leading-relaxed max-w-sm mb-10 animate-fade-in font-light" style={{ animationDelay: "0.2s" }}>
               Леднев — профессиональное строительство и отделка любой сложности. Более 10 лет на рынке, сотни завершённых объектов.
             </p>
-            <div className="flex gap-4 animate-fade-in" style={{ animationDelay: "0.3s" }}>
+            <div className="flex flex-wrap gap-3 animate-fade-in" style={{ animationDelay: "0.3s" }}>
               <button
-                onClick={() => scrollTo("contacts")}
-                className="bg-[#9A9A96] text-[#111110] px-8 py-3.5 text-xs tracking-[0.2em] uppercase font-medium hover:bg-[#ADADAA] transition-colors duration-300"
+                onClick={() => setModalOpen(true)}
+                className="bg-[#9A9A96] text-[#111110] px-7 py-3 text-xs tracking-[0.2em] uppercase font-medium hover:bg-[#ADADAA] transition-colors duration-300"
               >
-                Связаться
+                Заказать проект
               </button>
               <button
                 onClick={() => scrollTo("portfolio")}
-                className="border border-[#2A2825] text-[#E8E4DE] px-8 py-3.5 text-xs tracking-[0.2em] uppercase hover:border-[#9A9A96] hover:text-[#9A9A96] transition-colors duration-300"
+                className="border border-[#2A2825] text-[#E8E4DE] px-7 py-3 text-xs tracking-[0.2em] uppercase hover:border-[#9A9A96] hover:text-[#9A9A96] transition-colors duration-300"
               >
                 Портфолио
               </button>
