@@ -2,7 +2,16 @@ import { useEffect, useRef, useState } from "react";
 import Icon from "@/components/ui/icon";
 
 const ACCENT = "#9A9A96";
-const PORTFOLIO_IMAGE = "https://cdn.poehali.dev/projects/830044c3-63d5-4b40-9cea-c9639af22500/files/cd732ccd-02f4-47e0-a72b-4c98ea214f6d.jpg";
+// Объект 1 — ванная комната с мраморной плиткой
+const IMG_BATHROOM = "https://cdn.poehali.dev/files/4e2e61b2-78fa-4343-bda8-e670d29768fe.png";
+// Объект 2 — фасад дома с бассейном, вид снаружи
+const IMG_FACADE_1 = "https://cdn.poehali.dev/files/966cfbd1-e3aa-4c23-96fc-d3975a03468f.png";
+// Объект 2 — фасад с деревянной террасой
+const IMG_FACADE_2 = "https://cdn.poehali.dev/files/aea095e3-241d-4f98-b398-63557fa7b1be.png";
+// Объект 2 — крытый бассейн внутри
+const IMG_POOL = "https://cdn.poehali.dev/files/efb71f82-fc45-4a7c-a4b0-a72e80cc18b5.png";
+// Объект 3 — кухня-столовая с рейками
+const IMG_KITCHEN = "https://cdn.poehali.dev/files/bd7310fe-9023-45d7-8a7b-0d7fa6bb946c.png";
 const LOGO_WHITE = "https://cdn.poehali.dev/projects/830044c3-63d5-4b40-9cea-c9639af22500/bucket/55e40c34-2198-4782-8615-21b1fb699e9b.png";
 
 function useInView(threshold = 0.12) {
@@ -135,7 +144,7 @@ export default function Index() {
           </div>
           <div className="relative animate-fade-in" style={{ animationDelay: "0.15s" }}>
             <div className="aspect-[4/5] overflow-hidden">
-              <img src={PORTFOLIO_IMAGE} alt="Объект после отделки" className="w-full h-full object-cover grayscale contrast-110" />
+              <img src={IMG_FACADE_1} alt="Объект после отделки" className="w-full h-full object-cover grayscale contrast-110" />
               {/* металлическая рамка */}
               <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
             </div>
@@ -233,23 +242,47 @@ export default function Index() {
             </div>
           </Section>
           <Section>
-            <div className="grid md:grid-cols-3 gap-1">
+            {/* Строка 1: большое фото + маленькое */}
+            <div className="grid md:grid-cols-3 gap-1 mb-1">
               <div className="md:col-span-2 aspect-[16/9] overflow-hidden relative">
-                <img src={PORTFOLIO_IMAGE} alt="Проект 1" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
-                <div className="absolute inset-0 border border-[#2A2825]" />
-              </div>
-              <div className="grid grid-rows-2 gap-1">
-                <div className="aspect-square overflow-hidden relative">
-                  <img src={PORTFOLIO_IMAGE} alt="Проект 2" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
-                  <div className="absolute inset-0 border border-[#2A2825]" />
+                <img src={IMG_POOL} alt="Крытый бассейн" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
+                <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
+                <div className="absolute bottom-4 left-4 bg-[#111110]/80 px-3 py-1.5">
+                  <p className="text-xs tracking-widest uppercase text-[#9A9A96]">Крытый бассейн</p>
                 </div>
-                <div className="aspect-square bg-[#9A9A96] flex flex-col items-center justify-center p-6 text-center">
-                  <p className="font-golos text-4xl text-[#111110] font-bold">500+</p>
-                  <p className="text-xs tracking-[0.15em] uppercase text-[#111110]/70 mt-2 font-medium">объектов<br />завершено</p>
+              </div>
+              <div className="aspect-[16/9] md:aspect-auto overflow-hidden relative">
+                <img src={IMG_BATHROOM} alt="Ванная с мрамором" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
+                <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
+                <div className="absolute bottom-4 left-4 bg-[#111110]/80 px-3 py-1.5">
+                  <p className="text-xs tracking-widest uppercase text-[#9A9A96]">Ванная</p>
                 </div>
               </div>
             </div>
-            <p className="text-xs text-[#3A3835] mt-4 text-center tracking-widest uppercase">Пришлите ваши фотографии — разместим реальные объекты</p>
+            {/* Строка 2: три равных фото */}
+            <div className="grid md:grid-cols-3 gap-1">
+              <div className="aspect-[4/3] overflow-hidden relative">
+                <img src={IMG_FACADE_1} alt="Фасад, вид 1" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
+                <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
+                <div className="absolute bottom-4 left-4 bg-[#111110]/80 px-3 py-1.5">
+                  <p className="text-xs tracking-widest uppercase text-[#9A9A96]">Фасад</p>
+                </div>
+              </div>
+              <div className="aspect-[4/3] overflow-hidden relative">
+                <img src={IMG_FACADE_2} alt="Терраса" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
+                <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
+                <div className="absolute bottom-4 left-4 bg-[#111110]/80 px-3 py-1.5">
+                  <p className="text-xs tracking-widest uppercase text-[#9A9A96]">Терраса</p>
+                </div>
+              </div>
+              <div className="aspect-[4/3] overflow-hidden relative">
+                <img src={IMG_KITCHEN} alt="Кухня-столовая" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
+                <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
+                <div className="absolute bottom-4 left-4 bg-[#111110]/80 px-3 py-1.5">
+                  <p className="text-xs tracking-widest uppercase text-[#9A9A96]">Кухня</p>
+                </div>
+              </div>
+            </div>
           </Section>
         </div>
       </section>
