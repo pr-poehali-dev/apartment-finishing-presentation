@@ -52,6 +52,14 @@ const IMG_OBJ2_BED2 = "https://cdn.poehali.dev/files/1e87a65f-fe63-44d9-a4e4-742
 const IMG_OBJ2_KITCHEN = "https://cdn.poehali.dev/files/ddf859b6-b0d1-4aff-a77c-1bb54225a49b.png";
 // Объект 2 (доп.) — санузел с тёмной стеной
 const IMG_OBJ2_BATH = "https://cdn.poehali.dev/files/d8c39ce5-5a89-4ff8-b7d4-9622113d73f0.png";
+// Объект 4 (доп.) — санузел с деревянными дверями
+const IMG_OBJ4_BATH = "https://cdn.poehali.dev/files/d38c701b-99b4-4d3a-b8c3-4cd033bcbba1.png";
+// Объект 4 (доп.) — открытый бассейн с шезлонгами
+const IMG_OBJ4_POOL = "https://cdn.poehali.dev/files/52769dbe-546b-4257-bd23-0d65b913ffa6.png";
+// Объект 4 (доп.) — печь с изразцами
+const IMG_OBJ4_STOVE = "https://cdn.poehali.dev/files/99f28b9e-3bc9-4513-980a-8a9066e7377b.png";
+// Объект 4 (доп.) — столовая с деревянным потолком
+const IMG_OBJ4_DINING = "https://cdn.poehali.dev/files/449880cf-1faa-42a8-80d5-fd724f3a29e5.png";
 // Объект 1 — фитнес-зал рядом с бассейном
 const IMG_OBJ1_GYM = "https://cdn.poehali.dev/files/8ffa8ca7-7fe5-4d2d-b98f-86705792cee3.png";
 // Объект 1 — хаммам с мозаикой
@@ -137,8 +145,12 @@ const ALL_PORTFOLIO = [
   { src: IMG_OBJ3_BEDROOM, label: "Спальня" },
   { src: IMG_OBJ3_OFFICE, label: "Кабинет" },
   { src: IMG_OBJ4_FACADE, label: "Фасад" },
+  { src: IMG_OBJ4_POOL, label: "Бассейн" },
   { src: IMG_OBJ4_LIVING, label: "Гостиная" },
   { src: IMG_OBJ4_SAUNA, label: "Баня" },
+  { src: IMG_OBJ4_STOVE, label: "Печь" },
+  { src: IMG_OBJ4_DINING, label: "Столовая" },
+  { src: IMG_OBJ4_BATH, label: "Санузел" },
 ];
 
 function PhotoItem({ src, label, onClick }: { src: string; label: string; onClick: () => void }) {
@@ -488,12 +500,18 @@ export default function Index() {
               <div className="w-5 h-px bg-[#9A9A96]" />
               <p className="text-[#E8E4DE] text-sm font-medium">Пристройка: комната отдыха, русская баня и бассейн</p>
             </div>
-            <div className="grid md:grid-cols-3 gap-1">
+            <div className="grid md:grid-cols-3 gap-1 mb-1">
               <div className="md:col-span-2 aspect-[16/9]"><PhotoItem src={IMG_OBJ4_FACADE} label="Фасад" onClick={() => openLightbox(24)} /></div>
-              <div className="grid grid-rows-2 gap-1">
-                <div className="aspect-[16/9] md:aspect-auto"><PhotoItem src={IMG_OBJ4_LIVING} label="Гостиная" onClick={() => openLightbox(25)} /></div>
-                <div className="aspect-[16/9] md:aspect-auto"><PhotoItem src={IMG_OBJ4_SAUNA} label="Баня" onClick={() => openLightbox(26)} /></div>
-              </div>
+              <div className="aspect-[16/9]"><PhotoItem src={IMG_OBJ4_POOL} label="Бассейн" onClick={() => openLightbox(25)} /></div>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-1 mb-1">
+              <div className="aspect-[4/3]"><PhotoItem src={IMG_OBJ4_LIVING} label="Гостиная" onClick={() => openLightbox(26)} /></div>
+              <div className="aspect-[4/3]"><PhotoItem src={IMG_OBJ4_DINING} label="Столовая" onClick={() => openLightbox(27)} /></div>
+              <div className="aspect-[4/3]"><PhotoItem src={IMG_OBJ4_SAUNA} label="Баня" onClick={() => openLightbox(28)} /></div>
+              <div className="aspect-[4/3]"><PhotoItem src={IMG_OBJ4_STOVE} label="Печь" onClick={() => openLightbox(29)} /></div>
+            </div>
+            <div className="grid md:grid-cols-1 gap-1">
+              <div className="aspect-[21/9]"><PhotoItem src={IMG_OBJ4_BATH} label="Санузел" onClick={() => openLightbox(30)} /></div>
             </div>
           </Section>
         </div>
