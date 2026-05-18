@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Icon from "@/components/ui/icon";
 
 const PORTFOLIO_IMAGE = "https://cdn.poehali.dev/projects/830044c3-63d5-4b40-9cea-c9639af22500/files/dd7ac8ee-e50d-44c3-93c2-468304b1d7a5.jpg";
+const LOGO = "https://cdn.poehali.dev/projects/830044c3-63d5-4b40-9cea-c9639af22500/bucket/55e40c34-2198-4782-8615-21b1fb699e9b.png";
 
 function useInView(threshold = 0.15) {
   const ref = useRef<HTMLDivElement>(null);
@@ -69,9 +70,7 @@ export default function Index() {
       {/* NAV */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#F5F3EF]/95 backdrop-blur-sm border-b border-[#D8D3C9]">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <span className="font-cormorant text-xl font-light tracking-[0.15em] uppercase text-[#1A1A1A]">
-            АртОтделка
-          </span>
+          <img src={LOGO} alt="Леднев Строительная компания" className="h-8 w-auto" />
           <div className="hidden md:flex items-center gap-8">
             {[["about", "О нас"], ["services", "Услуги"], ["portfolio", "Портфолио"], ["advantages", "Преимущества"], ["process", "Процесс"], ["contacts", "Контакты"]].map(([id, label]) => (
               <button
@@ -102,7 +101,7 @@ export default function Index() {
       <section className="pt-24 min-h-screen flex flex-col justify-center relative overflow-hidden">
         <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center py-16">
           <div>
-            <p className="text-xs tracking-[0.25em] uppercase text-[#9E9891] mb-6 animate-fade-in">Отделочные работы — Москва</p>
+            <p className="text-xs tracking-[0.25em] uppercase text-[#9E9891] mb-6 animate-fade-in">Строительная компания — Москва</p>
             <h1 className="font-cormorant text-[clamp(3rem,8vw,7rem)] font-light leading-[0.9] mb-8 animate-fade-in" style={{ animationDelay: "0.1s" }}>
               Простран&shy;ство,
               <br />
@@ -111,7 +110,7 @@ export default function Index() {
               с умом
             </h1>
             <p className="text-[#6B6560] text-base leading-relaxed max-w-sm mb-10 animate-fade-in font-light" style={{ animationDelay: "0.2s" }}>
-              Профессиональная отделка любой сложности. Более 10 лет на рынке, сотни завершённых объектов по всей Москве.
+              Леднев — профессиональное строительство и отделка любой сложности. Более 10 лет на рынке, сотни завершённых объектов по всей Москве.
             </p>
             <div className="flex gap-4 animate-fade-in" style={{ animationDelay: "0.3s" }}>
               <button
@@ -348,7 +347,7 @@ export default function Index() {
       {/* FOOTER */}
       <footer className="border-t border-[#D8D3C9] py-8">
         <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
-          <span className="font-cormorant text-lg font-light tracking-[0.15em] uppercase">АртОтделка</span>
+          <img src={LOGO} alt="Леднев Строительная компания" className="h-7 w-auto" />
           <p className="text-xs text-[#9E9891] tracking-widest">© 2024 — Все права защищены</p>
         </div>
       </footer>
