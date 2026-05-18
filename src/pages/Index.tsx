@@ -356,10 +356,10 @@ export default function Index() {
               <div className="w-8 h-px bg-[#9A9A96]" />
               <p className="text-xs tracking-[0.3em] uppercase text-[#9A9A96]">Строительная компания — Краснодар</p>
             </div>
-            <h1 className="font-golos text-[clamp(2.4rem,5.5vw,5.5rem)] font-medium leading-[0.92] mb-8 animate-fade-in uppercase tracking-tight" style={{ animationDelay: "0.1s" }}>
-              Строим.<br />
-              <span className="text-[#9A9A96]">Чистовая<br />отделка.</span><br />
-              Сдаём.
+            <h1 className="font-golos text-[clamp(2rem,4.5vw,4.5rem)] font-medium leading-[1.05] mb-8 animate-fade-in uppercase tracking-tight" style={{ animationDelay: "0.1s" }}>
+              Реализуем<br />
+              интерьер таким,<br />
+              <span className="text-[#9A9A96]">каким вы его<br />задумали</span>
             </h1>
             <p className="text-[#6B6560] text-base leading-relaxed max-w-sm mb-10 animate-fade-in font-light" style={{ animationDelay: "0.2s" }}>
               Леднев — профессиональное строительство и отделка любой сложности. Более 10 лет на рынке, сотни завершённых объектов.
