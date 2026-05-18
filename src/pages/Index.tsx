@@ -40,6 +40,18 @@ const IMG_OBJ4_LIVING = "https://cdn.poehali.dev/files/3d360014-bede-432b-9721-1
 const IMG_OBJ4_FACADE = "https://cdn.poehali.dev/files/406999df-a1a5-4918-9b1e-9a662fa5abc5.png";
 // Объект 4 — баня с деревянными стенами
 const IMG_OBJ4_SAUNA = "https://cdn.poehali.dev/files/d932e215-c891-4b0f-ac16-3816495ae5e3.png";
+// Объект 2 (доп.) — коридор с синей аркой
+const IMG_OBJ2_HALL = "https://cdn.poehali.dev/files/583816f0-f143-4d17-96b2-6e6578b497c2.png";
+// Объект 2 (доп.) — гостиная с одуванчиками
+const IMG_OBJ2_LIVING = "https://cdn.poehali.dev/files/ca3d8611-4d95-49a2-a299-d3efa58873a7.png";
+// Объект 2 (доп.) — детская спальня с птицами
+const IMG_OBJ2_BED1 = "https://cdn.poehali.dev/files/9f3b795a-bcef-425f-a257-714cf6e11d99.png";
+// Объект 2 (доп.) — спальня с синими обоями
+const IMG_OBJ2_BED2 = "https://cdn.poehali.dev/files/1e87a65f-fe63-44d9-a4e4-7422627d828d.png";
+// Объект 2 (доп.) — кухня с мраморным столом
+const IMG_OBJ2_KITCHEN = "https://cdn.poehali.dev/files/ddf859b6-b0d1-4aff-a77c-1bb54225a49b.png";
+// Объект 2 (доп.) — санузел с тёмной стеной
+const IMG_OBJ2_BATH = "https://cdn.poehali.dev/files/d8c39ce5-5a89-4ff8-b7d4-9622113d73f0.png";
 // Объект 1 — фитнес-зал рядом с бассейном
 const IMG_OBJ1_GYM = "https://cdn.poehali.dev/files/8ffa8ca7-7fe5-4d2d-b98f-86705792cee3.png";
 // Объект 1 — хаммам с мозаикой
@@ -110,6 +122,12 @@ const ALL_PORTFOLIO = [
   { src: IMG_ARCH, label: "Столовая" },
   { src: IMG_BATH_GOLD, label: "Ванная" },
   { src: IMG_BEDROOM, label: "Спальня" },
+  { src: IMG_OBJ2_HALL, label: "Коридор" },
+  { src: IMG_OBJ2_LIVING, label: "Гостиная" },
+  { src: IMG_OBJ2_BED1, label: "Спальня" },
+  { src: IMG_OBJ2_BED2, label: "Спальня" },
+  { src: IMG_OBJ2_KITCHEN, label: "Кухня" },
+  { src: IMG_OBJ2_BATH, label: "Санузел" },
   { src: IMG_OBJ3_POOL, label: "Бассейн" },
   { src: IMG_OBJ3_LIVING, label: "Гостиная" },
   { src: IMG_OBJ3_KITCHEN, label: "Кухня" },
@@ -181,6 +199,30 @@ function Lightbox({ images, index, onClose, onPrev, onNext }: {
 export default function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [formName, setFormName] = useState("");
+  const [formPhone, setFormPhone] = useState("");
+  const [formDesc, setFormDesc] = useState("");
+  const [formStatus, setFormStatus] = useState<"idle" | "sending" | "ok" | "error">("idle");
+
+  const sendForm = async () => {
+    if (!formName.trim() || !formPhone.trim()) return;
+    setFormStatus("sending");
+    try {
+      const res = await fetch("https://functions.poehali.dev/29430bec-07f7-4866-b114-7c968617517a", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: formName, phone: formPhone, description: formDesc }),
+      });
+      if (res.ok) {
+        setFormStatus("ok");
+        setFormName(""); setFormPhone(""); setFormDesc("");
+      } else {
+        setFormStatus("error");
+      }
+    } catch {
+      setFormStatus("error");
+    }
+  };
 
   const openLightbox = (idx: number) => setLightboxIndex(idx);
   const closeLightbox = () => setLightboxIndex(null);
@@ -396,9 +438,19 @@ export default function Index() {
               <p className="text-[#E8E4DE] text-sm font-medium">Частный дом · пос. Северный, Краснодар</p>
             </div>
             <div className="grid md:grid-cols-3 gap-1 mb-1">
-              <div className="aspect-[4/3]"><PhotoItem src={IMG_ARCH} label="Столовая" onClick={() => openLightbox(7)} /></div>
-              <div className="aspect-[4/3]"><PhotoItem src={IMG_BATH_GOLD} label="Ванная" onClick={() => openLightbox(8)} /></div>
-              <div className="aspect-[4/3]"><PhotoItem src={IMG_BEDROOM} label="Спальня" onClick={() => openLightbox(9)} /></div>
+              <div className="md:col-span-2 aspect-[16/9]"><PhotoItem src={IMG_OBJ2_HALL} label="Коридор" onClick={() => openLightbox(7)} /></div>
+              <div className="aspect-[16/9]"><PhotoItem src={IMG_OBJ2_LIVING} label="Гостиная" onClick={() => openLightbox(8)} /></div>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-1 mb-1">
+              <div className="aspect-[4/3]"><PhotoItem src={IMG_ARCH} label="Столовая" onClick={() => openLightbox(9)} /></div>
+              <div className="aspect-[4/3]"><PhotoItem src={IMG_OBJ2_KITCHEN} label="Кухня" onClick={() => openLightbox(10)} /></div>
+              <div className="aspect-[4/3]"><PhotoItem src={IMG_BATH_GOLD} label="Ванная" onClick={() => openLightbox(11)} /></div>
+              <div className="aspect-[4/3]"><PhotoItem src={IMG_OBJ2_BATH} label="Санузел" onClick={() => openLightbox(12)} /></div>
+            </div>
+            <div className="grid md:grid-cols-3 gap-1">
+              <div className="aspect-[4/3]"><PhotoItem src={IMG_OBJ2_BED1} label="Спальня" onClick={() => openLightbox(13)} /></div>
+              <div className="aspect-[4/3]"><PhotoItem src={IMG_OBJ2_BED2} label="Спальня" onClick={() => openLightbox(14)} /></div>
+              <div className="aspect-[4/3]"><PhotoItem src={IMG_BEDROOM} label="Спальня" onClick={() => openLightbox(15)} /></div>
             </div>
 
             {/* Разделитель */}
@@ -412,18 +464,18 @@ export default function Index() {
               <p className="text-[#E8E4DE] text-sm font-medium">Частный дом · ФМР, Краснодар</p>
             </div>
             <div className="grid md:grid-cols-3 gap-1 mb-1">
-              <div className="md:col-span-2 aspect-[16/9]"><PhotoItem src={IMG_OBJ3_POOL} label="Бассейн" onClick={() => openLightbox(10)} /></div>
-              <div className="aspect-[16/9]"><PhotoItem src={IMG_OBJ3_LIVING} label="Гостиная" onClick={() => openLightbox(11)} /></div>
+              <div className="md:col-span-2 aspect-[16/9]"><PhotoItem src={IMG_OBJ3_POOL} label="Бассейн" onClick={() => openLightbox(16)} /></div>
+              <div className="aspect-[16/9]"><PhotoItem src={IMG_OBJ3_LIVING} label="Гостиная" onClick={() => openLightbox(17)} /></div>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-1 mb-1">
-              <div className="aspect-square"><PhotoItem src={IMG_OBJ3_KITCHEN} label="Кухня" onClick={() => openLightbox(12)} /></div>
-              <div className="aspect-square"><PhotoItem src={IMG_OBJ3_WARDROBE} label="Гардеробная" onClick={() => openLightbox(13)} /></div>
-              <div className="aspect-square"><PhotoItem src={IMG_OBJ3_TROPIC} label="Ванная" onClick={() => openLightbox(14)} /></div>
-              <div className="aspect-square"><PhotoItem src={IMG_OBJ3_BATH_YELLOW} label="Санузел" onClick={() => openLightbox(15)} /></div>
+              <div className="aspect-square"><PhotoItem src={IMG_OBJ3_KITCHEN} label="Кухня" onClick={() => openLightbox(18)} /></div>
+              <div className="aspect-square"><PhotoItem src={IMG_OBJ3_WARDROBE} label="Гардеробная" onClick={() => openLightbox(19)} /></div>
+              <div className="aspect-square"><PhotoItem src={IMG_OBJ3_TROPIC} label="Ванная" onClick={() => openLightbox(20)} /></div>
+              <div className="aspect-square"><PhotoItem src={IMG_OBJ3_BATH_YELLOW} label="Санузел" onClick={() => openLightbox(21)} /></div>
             </div>
             <div className="grid md:grid-cols-2 gap-1">
-              <div className="aspect-[4/3]"><PhotoItem src={IMG_OBJ3_BEDROOM} label="Спальня" onClick={() => openLightbox(16)} /></div>
-              <div className="aspect-[4/3]"><PhotoItem src={IMG_OBJ3_OFFICE} label="Кабинет" onClick={() => openLightbox(17)} /></div>
+              <div className="aspect-[4/3]"><PhotoItem src={IMG_OBJ3_BEDROOM} label="Спальня" onClick={() => openLightbox(22)} /></div>
+              <div className="aspect-[4/3]"><PhotoItem src={IMG_OBJ3_OFFICE} label="Кабинет" onClick={() => openLightbox(23)} /></div>
             </div>
 
             {/* Разделитель */}
@@ -437,10 +489,10 @@ export default function Index() {
               <p className="text-[#E8E4DE] text-sm font-medium">Пристройка: комната отдыха, русская баня и бассейн</p>
             </div>
             <div className="grid md:grid-cols-3 gap-1">
-              <div className="md:col-span-2 aspect-[16/9]"><PhotoItem src={IMG_OBJ4_FACADE} label="Фасад" onClick={() => openLightbox(18)} /></div>
+              <div className="md:col-span-2 aspect-[16/9]"><PhotoItem src={IMG_OBJ4_FACADE} label="Фасад" onClick={() => openLightbox(24)} /></div>
               <div className="grid grid-rows-2 gap-1">
-                <div className="aspect-[16/9] md:aspect-auto"><PhotoItem src={IMG_OBJ4_LIVING} label="Гостиная" onClick={() => openLightbox(19)} /></div>
-                <div className="aspect-[16/9] md:aspect-auto"><PhotoItem src={IMG_OBJ4_SAUNA} label="Баня" onClick={() => openLightbox(20)} /></div>
+                <div className="aspect-[16/9] md:aspect-auto"><PhotoItem src={IMG_OBJ4_LIVING} label="Гостиная" onClick={() => openLightbox(25)} /></div>
+                <div className="aspect-[16/9] md:aspect-auto"><PhotoItem src={IMG_OBJ4_SAUNA} label="Баня" onClick={() => openLightbox(26)} /></div>
               </div>
             </div>
           </Section>
@@ -555,21 +607,37 @@ export default function Index() {
                   <input
                     type="text"
                     placeholder="Ваше имя"
+                    value={formName}
+                    onChange={e => setFormName(e.target.value)}
                     className="w-full bg-transparent border-b border-[#2A2825] py-3 text-[#E8E4DE] placeholder-[#3A3835] text-sm focus:outline-none focus:border-[#9A9A96] transition-colors font-golos font-light"
                   />
                   <input
                     type="tel"
                     placeholder="Телефон"
+                    value={formPhone}
+                    onChange={e => setFormPhone(e.target.value)}
                     className="w-full bg-transparent border-b border-[#2A2825] py-3 text-[#E8E4DE] placeholder-[#3A3835] text-sm focus:outline-none focus:border-[#9A9A96] transition-colors font-golos font-light"
                   />
                   <textarea
                     placeholder="Описание объекта"
                     rows={3}
+                    value={formDesc}
+                    onChange={e => setFormDesc(e.target.value)}
                     className="w-full bg-transparent border-b border-[#2A2825] py-3 text-[#E8E4DE] placeholder-[#3A3835] text-sm focus:outline-none focus:border-[#9A9A96] transition-colors resize-none font-golos font-light"
                   />
                 </div>
-                <button className="mt-8 w-full bg-[#9A9A96] text-[#111110] py-4 text-xs tracking-[0.25em] uppercase font-bold hover:bg-[#ADADAA] transition-colors duration-300">
-                  Отправить заявку
+                {formStatus === "ok" && (
+                  <p className="mt-6 text-[#9A9A96] text-sm tracking-wide">✓ Заявка отправлена — свяжемся в ближайшее время</p>
+                )}
+                {formStatus === "error" && (
+                  <p className="mt-6 text-red-400 text-sm">Ошибка отправки. Позвоните нам напрямую.</p>
+                )}
+                <button
+                  onClick={sendForm}
+                  disabled={formStatus === "sending" || !formName.trim() || !formPhone.trim()}
+                  className="mt-8 w-full bg-[#9A9A96] text-[#111110] py-4 text-xs tracking-[0.25em] uppercase font-bold hover:bg-[#ADADAA] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {formStatus === "sending" ? "Отправляем..." : "Отправить заявку"}
                 </button>
               </div>
             </div>
