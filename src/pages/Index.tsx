@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Icon from "@/components/ui/icon";
 
 const ACCENT = "#9A9A96";
@@ -118,8 +118,9 @@ const advantages = [
   { icon: "Star", title: "Сотни клиентов", desc: "Более 80% заказчиков возвращаются к нам снова" },
 ];
 
-// Все фото портфолио в порядке для лайтбокса
+// Все фото портфолио — СТРОГО в том же порядке что и в сетке
 const ALL_PORTFOLIO = [
+  // Объект 1
   { src: IMG_POOL, label: "Бассейн" },
   { src: IMG_BATHROOM, label: "Ванная" },
   { src: IMG_FACADE_1, label: "Фасад" },
@@ -127,15 +128,17 @@ const ALL_PORTFOLIO = [
   { src: IMG_OBJ1_GYM, label: "Фитнес-зал" },
   { src: IMG_OBJ1_HAMMAM, label: "Хаммам" },
   { src: IMG_KITCHEN, label: "Кухня-столовая" },
-  { src: IMG_ARCH, label: "Столовая" },
-  { src: IMG_BATH_GOLD, label: "Ванная" },
-  { src: IMG_BEDROOM, label: "Спальня" },
+  // Объект 2
   { src: IMG_OBJ2_HALL, label: "Коридор" },
   { src: IMG_OBJ2_LIVING, label: "Гостиная" },
+  { src: IMG_ARCH, label: "Столовая" },
+  { src: IMG_OBJ2_KITCHEN, label: "Кухня" },
+  { src: IMG_BATH_GOLD, label: "Ванная" },
+  { src: IMG_OBJ2_BATH, label: "Санузел" },
   { src: IMG_OBJ2_BED1, label: "Спальня" },
   { src: IMG_OBJ2_BED2, label: "Спальня" },
-  { src: IMG_OBJ2_KITCHEN, label: "Кухня" },
-  { src: IMG_OBJ2_BATH, label: "Санузел" },
+  { src: IMG_BEDROOM, label: "Спальня" },
+  // Объект 3
   { src: IMG_OBJ3_POOL, label: "Бассейн" },
   { src: IMG_OBJ3_LIVING, label: "Гостиная" },
   { src: IMG_OBJ3_KITCHEN, label: "Кухня" },
@@ -144,18 +147,21 @@ const ALL_PORTFOLIO = [
   { src: IMG_OBJ3_BATH_YELLOW, label: "Санузел" },
   { src: IMG_OBJ3_BEDROOM, label: "Спальня" },
   { src: IMG_OBJ3_OFFICE, label: "Кабинет" },
+  // Объект 4
   { src: IMG_OBJ4_FACADE, label: "Фасад" },
   { src: IMG_OBJ4_POOL, label: "Бассейн" },
   { src: IMG_OBJ4_LIVING, label: "Гостиная" },
+  { src: IMG_OBJ4_DINING, label: "Столовая" },
   { src: IMG_OBJ4_SAUNA, label: "Баня" },
   { src: IMG_OBJ4_STOVE, label: "Печь" },
-  { src: IMG_OBJ4_DINING, label: "Столовая" },
   { src: IMG_OBJ4_BATH, label: "Санузел" },
 ];
 
-function PhotoItem({ src, label, onClick }: { src: string; label: string; onClick: () => void }) {
+function PhotoItem({ src, label }: { src: string; label: string }) {
+  const idx = ALL_PORTFOLIO.findIndex(p => p.src === src);
+  const { openPhoto } = usePhotoContext();
   return (
-    <div className="overflow-hidden relative cursor-zoom-in group h-full w-full" onClick={onClick}>
+    <div className="aspect-[4/3] overflow-hidden relative cursor-zoom-in group" onClick={() => openPhoto(idx)}>
       <img src={src} alt={label} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
       <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
       <div className="absolute bottom-3 left-3 bg-[#111110]/80 px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -169,6 +175,9 @@ function PhotoItem({ src, label, onClick }: { src: string; label: string; onClic
     </div>
   );
 }
+
+const PhotoContext = React.createContext<{ openPhoto: (idx: number) => void }>({ openPhoto: () => {} });
+function usePhotoContext() { return React.useContext(PhotoContext); }
 
 function Lightbox({ images, index, onClose, onPrev, onNext }: {
   images: typeof ALL_PORTFOLIO;
@@ -247,6 +256,7 @@ export default function Index() {
   };
 
   return (
+    <PhotoContext.Provider value={{ openPhoto: openLightbox }}>
     <div className="bg-[#111110] text-[#E8E4DE] font-golos min-h-screen">
       {lightboxIndex !== null && (
         <Lightbox images={ALL_PORTFOLIO} index={lightboxIndex} onClose={closeLightbox} onPrev={prevPhoto} onNext={nextPhoto} />
@@ -416,76 +426,78 @@ export default function Index() {
               </div>
             </div>
           </Section>
-          <Section>
-            {/* helper для единообразной ячейки */}
-            {(() => {
-              const P = ({ src, label, idx }: { src: string; label: string; idx: number }) => (
-                <div className="aspect-[4/3]"><PhotoItem src={src} label={label} onClick={() => openLightbox(idx)} /></div>
-              );
-              const PW = ({ src, label, idx }: { src: string; label: string; idx: number }) => (
-                <div className="aspect-[16/9] col-span-2"><PhotoItem src={src} label={label} onClick={() => openLightbox(idx)} /></div>
-              );
-              const Div = ({ title }: { title: string }) => (
-                <div className="col-span-full flex items-center gap-4 pt-2 pb-1">
-                  <div className="w-5 h-px bg-[#9A9A96]" />
-                  <p className="text-[#E8E4DE] text-sm font-medium">{title}</p>
+          {[
+            {
+              title: "СПА-комплекс частного дома · Горячий Ключ",
+              photos: [
+                { src: IMG_POOL, label: "Бассейн" },
+                { src: IMG_BATHROOM, label: "Ванная" },
+                { src: IMG_FACADE_1, label: "Фасад" },
+                { src: IMG_FACADE_2, label: "Терраса" },
+                { src: IMG_OBJ1_GYM, label: "Фитнес-зал" },
+                { src: IMG_OBJ1_HAMMAM, label: "Хаммам" },
+                { src: IMG_KITCHEN, label: "Кухня-столовая" },
+              ],
+            },
+            {
+              title: "Частный дом · пос. Северный, Краснодар",
+              photos: [
+                { src: IMG_OBJ2_HALL, label: "Коридор" },
+                { src: IMG_OBJ2_LIVING, label: "Гостиная" },
+                { src: IMG_ARCH, label: "Столовая" },
+                { src: IMG_OBJ2_KITCHEN, label: "Кухня" },
+                { src: IMG_BATH_GOLD, label: "Ванная" },
+                { src: IMG_OBJ2_BATH, label: "Санузел" },
+                { src: IMG_OBJ2_BED1, label: "Спальня" },
+                { src: IMG_OBJ2_BED2, label: "Спальня" },
+                { src: IMG_BEDROOM, label: "Спальня" },
+              ],
+            },
+            {
+              title: "Частный дом · ФМР, Краснодар",
+              photos: [
+                { src: IMG_OBJ3_POOL, label: "Бассейн" },
+                { src: IMG_OBJ3_LIVING, label: "Гостиная" },
+                { src: IMG_OBJ3_KITCHEN, label: "Кухня" },
+                { src: IMG_OBJ3_WARDROBE, label: "Гардеробная" },
+                { src: IMG_OBJ3_TROPIC, label: "Ванная" },
+                { src: IMG_OBJ3_BATH_YELLOW, label: "Санузел" },
+                { src: IMG_OBJ3_BEDROOM, label: "Спальня" },
+                { src: IMG_OBJ3_OFFICE, label: "Кабинет" },
+              ],
+            },
+            {
+              title: "Пристройка: комната отдыха, русская баня и бассейн",
+              photos: [
+                { src: IMG_OBJ4_FACADE, label: "Фасад" },
+                { src: IMG_OBJ4_POOL, label: "Бассейн" },
+                { src: IMG_OBJ4_LIVING, label: "Гостиная" },
+                { src: IMG_OBJ4_DINING, label: "Столовая" },
+                { src: IMG_OBJ4_SAUNA, label: "Баня" },
+                { src: IMG_OBJ4_STOVE, label: "Печь" },
+                { src: IMG_OBJ4_BATH, label: "Санузел" },
+              ],
+            },
+          ].map((obj, oi) => (
+            <div key={oi} className="mb-10">
+              <div className="flex items-center gap-4 mb-3">
+                <div className="w-5 h-px bg-[#9A9A96]" />
+                <p className="text-[#E8E4DE] text-sm font-medium">{obj.title}</p>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-1">
+                {obj.photos.map((photo) => (
+                  <PhotoItem key={photo.src} src={photo.src} label={photo.label} />
+                ))}
+              </div>
+              {oi < 3 && (
+                <div className="flex items-center gap-4 mt-8">
+                  <div className="flex-1 h-px bg-[#2A2825]" />
+                  <div className="w-1.5 h-1.5 bg-[#9A9A96] rotate-45" />
+                  <div className="flex-1 h-px bg-[#2A2825]" />
                 </div>
-              );
-              const Sep = () => (
-                <div className="col-span-full flex items-center gap-4 my-6">
-                  <div className="flex-1 h-px bg-[#2A2825]" /><div className="w-1.5 h-1.5 bg-[#9A9A96] rotate-45" /><div className="flex-1 h-px bg-[#2A2825]" />
-                </div>
-              );
-              return (
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-1">
-                  <Div title="СПА-комплекс частного дома · Горячий Ключ" />
-                  <PW src={IMG_POOL} label="Бассейн" idx={0} />
-                  <P src={IMG_BATHROOM} label="Ванная" idx={1} />
-                  <P src={IMG_FACADE_2} label="Терраса" idx={3} />
-                  <P src={IMG_FACADE_1} label="Фасад" idx={2} />
-                  <P src={IMG_OBJ1_GYM} label="Фитнес-зал" idx={4} />
-                  <P src={IMG_OBJ1_HAMMAM} label="Хаммам" idx={5} />
-                  <PW src={IMG_KITCHEN} label="Кухня-столовая" idx={6} />
-
-                  <Sep />
-
-                  <Div title="Частный дом · пос. Северный, Краснодар" />
-                  <PW src={IMG_OBJ2_HALL} label="Коридор" idx={7} />
-                  <P src={IMG_OBJ2_LIVING} label="Гостиная" idx={8} />
-                  <P src={IMG_ARCH} label="Столовая" idx={9} />
-                  <P src={IMG_OBJ2_KITCHEN} label="Кухня" idx={10} />
-                  <P src={IMG_BATH_GOLD} label="Ванная" idx={11} />
-                  <P src={IMG_OBJ2_BATH} label="Санузел" idx={12} />
-                  <P src={IMG_OBJ2_BED1} label="Спальня" idx={13} />
-                  <P src={IMG_OBJ2_BED2} label="Спальня" idx={14} />
-                  <P src={IMG_BEDROOM} label="Спальня" idx={15} />
-
-                  <Sep />
-
-                  <Div title="Частный дом · ФМР, Краснодар" />
-                  <PW src={IMG_OBJ3_POOL} label="Бассейн" idx={16} />
-                  <P src={IMG_OBJ3_LIVING} label="Гостиная" idx={17} />
-                  <P src={IMG_OBJ3_KITCHEN} label="Кухня" idx={18} />
-                  <P src={IMG_OBJ3_WARDROBE} label="Гардеробная" idx={19} />
-                  <P src={IMG_OBJ3_TROPIC} label="Ванная" idx={20} />
-                  <P src={IMG_OBJ3_BATH_YELLOW} label="Санузел" idx={21} />
-                  <PW src={IMG_OBJ3_BEDROOM} label="Спальня" idx={22} />
-                  <P src={IMG_OBJ3_OFFICE} label="Кабинет" idx={23} />
-
-                  <Sep />
-
-                  <Div title="Пристройка: комната отдыха, русская баня и бассейн" />
-                  <PW src={IMG_OBJ4_FACADE} label="Фасад" idx={24} />
-                  <P src={IMG_OBJ4_POOL} label="Бассейн" idx={25} />
-                  <P src={IMG_OBJ4_LIVING} label="Гостиная" idx={26} />
-                  <P src={IMG_OBJ4_DINING} label="Столовая" idx={27} />
-                  <P src={IMG_OBJ4_SAUNA} label="Баня" idx={28} />
-                  <P src={IMG_OBJ4_STOVE} label="Печь" idx={29} />
-                  <PW src={IMG_OBJ4_BATH} label="Санузел" idx={30} />
-                </div>
-              );
-            })()}
-          </Section>
+              )}
+            </div>
+          ))}
         </div>
       </section>
 
@@ -643,5 +655,6 @@ export default function Index() {
         </div>
       </footer>
     </div>
+    </PhotoContext.Provider>
   );
 }
