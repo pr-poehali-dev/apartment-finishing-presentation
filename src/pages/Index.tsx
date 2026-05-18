@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import Icon from "@/components/ui/icon";
 
-const PORTFOLIO_IMAGE = "https://cdn.poehali.dev/projects/830044c3-63d5-4b40-9cea-c9639af22500/files/dd7ac8ee-e50d-44c3-93c2-468304b1d7a5.jpg";
-const LOGO = "https://cdn.poehali.dev/projects/830044c3-63d5-4b40-9cea-c9639af22500/bucket/55e40c34-2198-4782-8615-21b1fb699e9b.png";
+const PORTFOLIO_IMAGE = "https://cdn.poehali.dev/projects/830044c3-63d5-4b40-9cea-c9639af22500/files/cd732ccd-02f4-47e0-a72b-4c98ea214f6d.jpg";
+const LOGO_WHITE = "https://cdn.poehali.dev/projects/830044c3-63d5-4b40-9cea-c9639af22500/bucket/55e40c34-2198-4782-8615-21b1fb699e9b.png";
 
-function useInView(threshold = 0.15) {
+function useInView(threshold = 0.12) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   useEffect(() => {
@@ -23,7 +23,7 @@ function Section({ children, className = "" }: { children: React.ReactNode; clas
   return (
     <div
       ref={ref}
-      className={`transition-all duration-700 ease-out ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} ${className}`}
+      className={`transition-all duration-700 ease-out ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"} ${className}`}
     >
       {children}
     </div>
@@ -40,11 +40,11 @@ const services = [
 ];
 
 const steps = [
-  { step: "1", title: "Замер и консультация", desc: "Выезжаем на объект, обсуждаем задачи, предлагаем решения" },
-  { step: "2", title: "Смета и договор", desc: "Прозрачный расчёт без скрытых платежей, фиксированные сроки" },
-  { step: "3", title: "Закупка материалов", desc: "Работаем с проверенными поставщиками, контролируем качество" },
-  { step: "4", title: "Выполнение работ", desc: "Строгое соблюдение технологий, ежедневный отчёт клиенту" },
-  { step: "5", title: "Сдача объекта", desc: "Принимаете работу, подписываем акт, даём гарантию" },
+  { step: "01", title: "Замер и консультация", desc: "Выезжаем на объект, обсуждаем задачи, предлагаем решения" },
+  { step: "02", title: "Смета и договор", desc: "Прозрачный расчёт без скрытых платежей, фиксированные сроки" },
+  { step: "03", title: "Закупка материалов", desc: "Работаем с проверенными поставщиками, контролируем качество" },
+  { step: "04", title: "Выполнение работ", desc: "Строгое соблюдение технологий, ежедневный отчёт клиенту" },
+  { step: "05", title: "Сдача объекта", desc: "Принимаете работу, подписываем акт, даём гарантию" },
 ];
 
 const advantages = [
@@ -53,7 +53,7 @@ const advantages = [
   { icon: "Shield", title: "Гарантия на работы", desc: "Официальная гарантия на все виды работ до 3 лет по договору" },
   { icon: "Clock", title: "Соблюдение сроков", desc: "99% объектов сдаём в срок — это закреплено в договоре" },
   { icon: "FileText", title: "Прозрачная смета", desc: "Фиксированная цена без дополнительных платежей в процессе" },
-  { icon: "Star", title: "Сотни довольных клиентов", desc: "Более 80% заказчиков возвращаются к нам снова" },
+  { icon: "Star", title: "Сотни клиентов", desc: "Более 80% заказчиков возвращаются к нам снова" },
 ];
 
 export default function Index() {
@@ -65,29 +65,29 @@ export default function Index() {
   };
 
   return (
-    <div className="bg-[#F5F3EF] text-[#1A1A1A] font-golos min-h-screen">
+    <div className="bg-[#111110] text-[#E8E4DE] font-golos min-h-screen">
 
       {/* NAV */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#F5F3EF]/95 backdrop-blur-sm border-b border-[#D8D3C9]">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#111110]/95 backdrop-blur-sm border-b border-[#2A2825]">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <img src={LOGO} alt="Леднев Строительная компания" className="h-8 w-auto" />
+          <img src={LOGO_WHITE} alt="Леднев Строительная компания" className="h-8 w-auto brightness-0 invert" />
           <div className="hidden md:flex items-center gap-8">
             {[["about", "О нас"], ["services", "Услуги"], ["portfolio", "Портфолио"], ["advantages", "Преимущества"], ["process", "Процесс"], ["contacts", "Контакты"]].map(([id, label]) => (
               <button
                 key={id}
                 onClick={() => scrollTo(id)}
-                className="text-xs tracking-[0.12em] uppercase text-[#6B6560] hover:text-[#1A1A1A] transition-colors font-golos"
+                className="text-xs tracking-[0.15em] uppercase text-[#6B6560] hover:text-[#E8E4DE] transition-colors font-golos"
               >
                 {label}
               </button>
             ))}
           </div>
-          <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)}>
+          <button className="md:hidden text-[#E8E4DE]" onClick={() => setMenuOpen(!menuOpen)}>
             <Icon name={menuOpen ? "X" : "Menu"} size={20} />
           </button>
         </div>
         {menuOpen && (
-          <div className="md:hidden bg-[#F5F3EF] border-t border-[#D8D3C9] px-6 py-4 flex flex-col gap-4">
+          <div className="md:hidden bg-[#111110] border-t border-[#2A2825] px-6 py-4 flex flex-col gap-4">
             {[["about", "О нас"], ["services", "Услуги"], ["portfolio", "Портфолио"], ["advantages", "Преимущества"], ["process", "Процесс"], ["contacts", "Контакты"]].map(([id, label]) => (
               <button key={id} onClick={() => scrollTo(id)} className="text-left text-sm tracking-widest uppercase text-[#6B6560]">
                 {label}
@@ -99,29 +99,34 @@ export default function Index() {
 
       {/* HERO */}
       <section className="pt-24 min-h-screen flex flex-col justify-center relative overflow-hidden">
-        <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center py-16">
+        {/* фоновая текстура бетона */}
+        <div className="absolute inset-0 opacity-[0.04]"
+          style={{ backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 2px, #fff 2px, #fff 3px), repeating-linear-gradient(90deg, transparent, transparent 40px, #fff 40px, #fff 41px)" }}
+        />
+        <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center py-16 relative z-10">
           <div>
-            <p className="text-xs tracking-[0.25em] uppercase text-[#9E9891] mb-6 animate-fade-in">Строительная компания — Москва</p>
-            <h1 className="font-cormorant text-[clamp(3rem,8vw,7rem)] font-light leading-[0.9] mb-8 animate-fade-in" style={{ animationDelay: "0.1s" }}>
-              Простран&shy;ство,
-              <br />
-              <em className="italic text-[#8B7355]">созданное</em>
-              <br />
-              с умом
+            <div className="flex items-center gap-3 mb-8 animate-fade-in">
+              <div className="w-8 h-px bg-[#C17F3E]" />
+              <p className="text-xs tracking-[0.3em] uppercase text-[#C17F3E]">Строительная компания — Краснодар</p>
+            </div>
+            <h1 className="font-golos text-[clamp(2.8rem,7vw,6.5rem)] font-medium leading-[0.88] mb-8 animate-fade-in uppercase tracking-tight" style={{ animationDelay: "0.1s" }}>
+              Строим.<br />
+              <span className="text-[#C17F3E]">Отделываем.</span><br />
+              Сдаём.
             </h1>
             <p className="text-[#6B6560] text-base leading-relaxed max-w-sm mb-10 animate-fade-in font-light" style={{ animationDelay: "0.2s" }}>
-              Леднев — профессиональное строительство и отделка любой сложности. Более 10 лет на рынке, сотни завершённых объектов по всей Москве.
+              Леднев — профессиональное строительство и отделка любой сложности. Более 10 лет на рынке, сотни завершённых объектов.
             </p>
             <div className="flex gap-4 animate-fade-in" style={{ animationDelay: "0.3s" }}>
               <button
                 onClick={() => scrollTo("contacts")}
-                className="bg-[#1A1A1A] text-[#F5F3EF] px-8 py-3.5 text-xs tracking-[0.15em] uppercase hover:bg-[#8B7355] transition-colors duration-300"
+                className="bg-[#C17F3E] text-[#111110] px-8 py-3.5 text-xs tracking-[0.2em] uppercase font-medium hover:bg-[#D4913F] transition-colors duration-300"
               >
                 Связаться
               </button>
               <button
                 onClick={() => scrollTo("portfolio")}
-                className="border border-[#D8D3C9] text-[#1A1A1A] px-8 py-3.5 text-xs tracking-[0.15em] uppercase hover:border-[#1A1A1A] transition-colors duration-300"
+                className="border border-[#2A2825] text-[#E8E4DE] px-8 py-3.5 text-xs tracking-[0.2em] uppercase hover:border-[#C17F3E] hover:text-[#C17F3E] transition-colors duration-300"
               >
                 Портфолио
               </button>
@@ -129,45 +134,51 @@ export default function Index() {
           </div>
           <div className="relative animate-fade-in" style={{ animationDelay: "0.15s" }}>
             <div className="aspect-[4/5] overflow-hidden">
-              <img src={PORTFOLIO_IMAGE} alt="Интерьер после отделки" className="w-full h-full object-cover" />
+              <img src={PORTFOLIO_IMAGE} alt="Объект после отделки" className="w-full h-full object-cover grayscale contrast-110" />
+              {/* металлическая рамка */}
+              <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
             </div>
-            <div className="absolute -bottom-4 -left-4 bg-[#8B7355] text-[#F5F3EF] p-5">
-              <p className="font-cormorant text-4xl font-light">500+</p>
-              <p className="text-xs tracking-[0.1em] uppercase mt-1 font-golos font-light">Проектов</p>
+            <div className="absolute -bottom-4 -left-4 bg-[#C17F3E] text-[#111110] p-5">
+              <p className="font-golos text-4xl font-bold">500+</p>
+              <p className="text-xs tracking-[0.15em] uppercase mt-1 font-medium">Проектов</p>
             </div>
+            {/* декоративный угол */}
+            <div className="absolute -top-3 -right-3 w-12 h-12 border-t-2 border-r-2 border-[#C17F3E]" />
           </div>
         </div>
-        {/* Divider */}
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-[#D8D3C9]" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-[#2A2825]" />
       </section>
 
       {/* ABOUT */}
-      <section id="about" className="py-24 border-b border-[#D8D3C9]">
+      <section id="about" className="py-24 border-b border-[#2A2825]">
         <div className="max-w-6xl mx-auto px-6">
           <Section>
             <div className="grid md:grid-cols-[1fr_2fr] gap-16 items-start">
               <div>
-                <p className="text-xs tracking-[0.25em] uppercase text-[#9E9891] mb-3">О компании</p>
-                <h2 className="font-cormorant text-5xl font-light leading-tight">История<br /><em className="italic text-[#8B7355]">и опыт</em></h2>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-5 h-px bg-[#C17F3E]" />
+                  <p className="text-xs tracking-[0.25em] uppercase text-[#C17F3E]">О компании</p>
+                </div>
+                <h2 className="font-golos text-5xl font-bold uppercase leading-tight">История<br /><span className="text-[#C17F3E]">и опыт</span></h2>
               </div>
               <div className="grid md:grid-cols-2 gap-10">
                 <div>
                   <p className="text-[#6B6560] leading-relaxed font-light text-sm">
-                    Компания основана в 2014 году командой профессионалов с многолетним опытом в строительстве. За это время мы прошли путь от небольшой бригады до полноценной отделочной компании с собственным штатом специалистов.
+                    Компания основана в 2014 году командой профессионалов с многолетним опытом в строительстве. За это время мы прошли путь от небольшой бригады до полноценной строительной компании с собственным штатом специалистов.
                   </p>
                 </div>
                 <div>
                   <p className="text-[#6B6560] leading-relaxed font-light text-sm">
-                    Наша миссия — создавать пространства, в которых хочется жить и работать. Мы убеждены, что качественная отделка — это не роскошь, а стандарт. Каждый объект ведём с той же ответственностью, что и первый.
+                    Наша миссия — создавать пространства, в которых хочется жить и работать. Мы убеждены, что качественное строительство — это не роскошь, а стандарт. Каждый объект ведём с той же ответственностью, что и первый.
                   </p>
                 </div>
-                <div className="border-l-2 border-[#8B7355] pl-4">
-                  <p className="font-cormorant text-4xl font-light text-[#1A1A1A]">10+</p>
-                  <p className="text-xs tracking-widest uppercase text-[#9E9891] mt-1">лет на рынке</p>
+                <div className="border-l-2 border-[#C17F3E] pl-4">
+                  <p className="font-golos text-4xl font-bold text-[#E8E4DE]">10+</p>
+                  <p className="text-xs tracking-widest uppercase text-[#6B6560] mt-1">лет на рынке</p>
                 </div>
-                <div className="border-l-2 border-[#D8D3C9] pl-4">
-                  <p className="font-cormorant text-4xl font-light text-[#1A1A1A]">500+</p>
-                  <p className="text-xs tracking-widest uppercase text-[#9E9891] mt-1">завершённых объектов</p>
+                <div className="border-l-2 border-[#2A2825] pl-4">
+                  <p className="font-golos text-4xl font-bold text-[#E8E4DE]">500+</p>
+                  <p className="text-xs tracking-widest uppercase text-[#6B6560] mt-1">завершённых объектов</p>
                 </div>
               </div>
             </div>
@@ -176,25 +187,28 @@ export default function Index() {
       </section>
 
       {/* SERVICES */}
-      <section id="services" className="py-24 border-b border-[#D8D3C9] bg-[#EFECE6]">
+      <section id="services" className="py-24 border-b border-[#2A2825] bg-[#161513]">
         <div className="max-w-6xl mx-auto px-6">
           <Section>
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
               <div>
-                <p className="text-xs tracking-[0.25em] uppercase text-[#9E9891] mb-3">Что мы делаем</p>
-                <h2 className="font-cormorant text-5xl font-light">Услуги</h2>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-5 h-px bg-[#C17F3E]" />
+                  <p className="text-xs tracking-[0.25em] uppercase text-[#C17F3E]">Что мы делаем</p>
+                </div>
+                <h2 className="font-golos text-5xl font-bold uppercase">Услуги</h2>
               </div>
               <p className="text-[#6B6560] text-sm max-w-xs font-light leading-relaxed">
                 Полный спектр отделочных работ для жилых и коммерческих помещений
               </p>
             </div>
           </Section>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-[#D8D3C9]">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-[#2A2825]">
             {services.map((s, i) => (
               <Section key={i}>
-                <div className="bg-[#EFECE6] p-8 hover:bg-[#F5F3EF] transition-colors duration-300 group">
-                  <p className="font-cormorant text-6xl font-light text-[#D8D3C9] group-hover:text-[#8B7355] transition-colors duration-300 mb-4">{s.num}</p>
-                  <h3 className="text-base font-medium tracking-wide mb-2">{s.title}</h3>
+                <div className="bg-[#161513] p-8 hover:bg-[#1E1C1A] transition-colors duration-300 group h-full">
+                  <p className="font-golos text-5xl font-bold text-[#2A2825] group-hover:text-[#C17F3E] transition-colors duration-300 mb-5">{s.num}</p>
+                  <h3 className="text-sm font-medium tracking-widest uppercase mb-3 text-[#E8E4DE]">{s.title}</h3>
                   <p className="text-sm text-[#6B6560] leading-relaxed font-light">{s.desc}</p>
                 </div>
               </Section>
@@ -204,53 +218,61 @@ export default function Index() {
       </section>
 
       {/* PORTFOLIO */}
-      <section id="portfolio" className="py-24 border-b border-[#D8D3C9]">
+      <section id="portfolio" className="py-24 border-b border-[#2A2825]">
         <div className="max-w-6xl mx-auto px-6">
           <Section>
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
               <div>
-                <p className="text-xs tracking-[0.25em] uppercase text-[#9E9891] mb-3">Наши работы</p>
-                <h2 className="font-cormorant text-5xl font-light">Портфолио</h2>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-5 h-px bg-[#C17F3E]" />
+                  <p className="text-xs tracking-[0.25em] uppercase text-[#C17F3E]">Наши работы</p>
+                </div>
+                <h2 className="font-golos text-5xl font-bold uppercase">Портфолио</h2>
               </div>
             </div>
           </Section>
           <Section>
             <div className="grid md:grid-cols-3 gap-1">
-              <div className="md:col-span-2 aspect-[16/9] overflow-hidden">
-                <img src={PORTFOLIO_IMAGE} alt="Проект 1" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+              <div className="md:col-span-2 aspect-[16/9] overflow-hidden relative">
+                <img src={PORTFOLIO_IMAGE} alt="Проект 1" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
+                <div className="absolute inset-0 border border-[#2A2825]" />
               </div>
               <div className="grid grid-rows-2 gap-1">
-                <div className="aspect-square overflow-hidden">
-                  <img src={PORTFOLIO_IMAGE} alt="Проект 2" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+                <div className="aspect-square overflow-hidden relative">
+                  <img src={PORTFOLIO_IMAGE} alt="Проект 2" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
+                  <div className="absolute inset-0 border border-[#2A2825]" />
                 </div>
-                <div className="aspect-square bg-[#1A1A1A] flex flex-col items-center justify-center p-6 text-center">
-                  <p className="font-cormorant text-4xl text-[#F5F3EF] font-light">500+</p>
-                  <p className="text-xs tracking-[0.15em] uppercase text-[#9E9891] mt-2">объектов<br />завершено</p>
+                <div className="aspect-square bg-[#C17F3E] flex flex-col items-center justify-center p-6 text-center">
+                  <p className="font-golos text-4xl text-[#111110] font-bold">500+</p>
+                  <p className="text-xs tracking-[0.15em] uppercase text-[#111110]/70 mt-2 font-medium">объектов<br />завершено</p>
                 </div>
               </div>
             </div>
-            <p className="text-xs text-[#9E9891] mt-4 text-center tracking-widest uppercase">Пришлите ваши фотографии — разместим реальные объекты</p>
+            <p className="text-xs text-[#3A3835] mt-4 text-center tracking-widest uppercase">Пришлите ваши фотографии — разместим реальные объекты</p>
           </Section>
         </div>
       </section>
 
       {/* ADVANTAGES */}
-      <section id="advantages" className="py-24 border-b border-[#D8D3C9] bg-[#1A1A1A]">
+      <section id="advantages" className="py-24 border-b border-[#2A2825] bg-[#161513]">
         <div className="max-w-6xl mx-auto px-6">
           <Section>
             <div className="mb-16">
-              <p className="text-xs tracking-[0.25em] uppercase text-[#6B6560] mb-3">Почему выбирают нас</p>
-              <h2 className="font-cormorant text-5xl font-light text-[#F5F3EF]">Преимущества</h2>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-5 h-px bg-[#C17F3E]" />
+                <p className="text-xs tracking-[0.25em] uppercase text-[#C17F3E]">Почему выбирают нас</p>
+              </div>
+              <h2 className="font-golos text-5xl font-bold uppercase text-[#E8E4DE]">Преимущества</h2>
             </div>
           </Section>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {advantages.map((a, i) => (
               <Section key={i}>
-                <div className="border-t border-[#333] pt-6">
-                  <div className="w-10 h-10 border border-[#8B7355] flex items-center justify-center mb-5">
-                    <Icon name={a.icon as "Award"} size={16} className="text-[#8B7355]" />
+                <div className="border-t border-[#2A2825] pt-6 group hover:border-[#C17F3E] transition-colors duration-300">
+                  <div className="w-10 h-10 border border-[#2A2825] group-hover:border-[#C17F3E] flex items-center justify-center mb-5 transition-colors duration-300">
+                    <Icon name={a.icon as "Award"} size={16} className="text-[#C17F3E]" />
                   </div>
-                  <h3 className="text-[#F5F3EF] font-medium tracking-wide mb-2 text-sm">{a.title}</h3>
+                  <h3 className="text-[#E8E4DE] font-medium tracking-wide mb-2 text-sm uppercase">{a.title}</h3>
                   <p className="text-[#6B6560] text-sm leading-relaxed font-light">{a.desc}</p>
                 </div>
               </Section>
@@ -260,20 +282,23 @@ export default function Index() {
       </section>
 
       {/* PROCESS */}
-      <section id="process" className="py-24 border-b border-[#D8D3C9]">
+      <section id="process" className="py-24 border-b border-[#2A2825]">
         <div className="max-w-6xl mx-auto px-6">
           <Section>
             <div className="mb-16">
-              <p className="text-xs tracking-[0.25em] uppercase text-[#9E9891] mb-3">Как мы работаем</p>
-              <h2 className="font-cormorant text-5xl font-light">Процесс</h2>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-5 h-px bg-[#C17F3E]" />
+                <p className="text-xs tracking-[0.25em] uppercase text-[#C17F3E]">Как мы работаем</p>
+              </div>
+              <h2 className="font-golos text-5xl font-bold uppercase">Процесс</h2>
             </div>
           </Section>
-          <div className="space-y-px bg-[#D8D3C9]">
+          <div className="space-y-px bg-[#2A2825]">
             {steps.map((s, i) => (
               <Section key={i}>
-                <div className="bg-[#F5F3EF] grid md:grid-cols-[80px_1fr_2fr] gap-6 items-center px-8 py-7 hover:bg-[#EFECE6] transition-colors duration-300">
-                  <p className="font-cormorant text-5xl font-light text-[#D8D3C9]">{s.step}</p>
-                  <h3 className="font-medium text-sm tracking-wide">{s.title}</h3>
+                <div className="bg-[#111110] grid md:grid-cols-[100px_1fr_2fr] gap-6 items-center px-8 py-7 hover:bg-[#161513] transition-colors duration-300 group">
+                  <p className="font-golos text-5xl font-bold text-[#2A2825] group-hover:text-[#C17F3E] transition-colors duration-300">{s.step}</p>
+                  <h3 className="font-medium text-sm tracking-widest uppercase text-[#E8E4DE]">{s.title}</h3>
                   <p className="text-[#6B6560] text-sm font-light leading-relaxed">{s.desc}</p>
                 </div>
               </Section>
@@ -283,74 +308,73 @@ export default function Index() {
       </section>
 
       {/* CONTACTS */}
-      <section id="contacts" className="py-24">
+      <section id="contacts" className="py-24 bg-[#161513]">
         <div className="max-w-6xl mx-auto px-6">
           <Section>
             <div className="grid md:grid-cols-2 gap-16 items-start">
               <div>
-                <p className="text-xs tracking-[0.25em] uppercase text-[#9E9891] mb-3">Свяжитесь с нами</p>
-                <h2 className="font-cormorant text-5xl font-light mb-8">Контакты</h2>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-5 h-px bg-[#C17F3E]" />
+                  <p className="text-xs tracking-[0.25em] uppercase text-[#C17F3E]">Свяжитесь с нами</p>
+                </div>
+                <h2 className="font-golos text-5xl font-bold uppercase mb-10">Контакты</h2>
                 <div className="space-y-6">
                   {[
                     { icon: "Phone", label: "Телефон", value: "+7 (964) 900-44-66", href: "tel:+79649004466" },
                     { icon: "Mail", label: "Почта", value: "89649004466@mail.ru", href: "mailto:89649004466@mail.ru" },
                     { icon: "MapPin", label: "Адрес", value: "г. Краснодар, ул. Ростовское шоссе 30/3, ТЦ «Грани», 2 этаж", href: null },
                   ].map((c) => (
-                    <div key={c.label} className="flex items-start gap-4 border-b border-[#D8D3C9] pb-6">
-                      <div className="w-9 h-9 border border-[#D8D3C9] flex items-center justify-center shrink-0 mt-0.5">
-                        <Icon name={c.icon as "Phone"} size={14} className="text-[#8B7355]" />
+                    <div key={c.label} className="flex items-start gap-4 border-b border-[#2A2825] pb-6">
+                      <div className="w-9 h-9 border border-[#2A2825] flex items-center justify-center shrink-0 mt-0.5">
+                        <Icon name={c.icon as "Phone"} size={14} className="text-[#C17F3E]" />
                       </div>
                       <div>
-                        <p className="text-xs tracking-widest uppercase text-[#9E9891] mb-1">{c.label}</p>
+                        <p className="text-xs tracking-widest uppercase text-[#6B6560] mb-1">{c.label}</p>
                         {c.href ? (
-                          <a href={c.href} className="text-[#1A1A1A] font-light hover:text-[#8B7355] transition-colors">{c.value}</a>
+                          <a href={c.href} className="text-[#E8E4DE] font-light hover:text-[#C17F3E] transition-colors">{c.value}</a>
                         ) : (
-                          <p className="text-[#1A1A1A] font-light">{c.value}</p>
+                          <p className="text-[#E8E4DE] font-light">{c.value}</p>
                         )}
                       </div>
                     </div>
                   ))}
                 </div>
                 <div className="flex gap-3 mt-8">
-                  <a
-                    href="https://t.me/+79649004466"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="border border-[#D8D3C9] px-4 py-2 text-xs tracking-widest uppercase hover:bg-[#1A1A1A] hover:text-[#F5F3EF] hover:border-[#1A1A1A] transition-all duration-300"
-                  >
+                  <a href="https://t.me/+79649004466" target="_blank" rel="noopener noreferrer"
+                    className="border border-[#2A2825] text-[#E8E4DE] px-4 py-2 text-xs tracking-widest uppercase hover:bg-[#C17F3E] hover:text-[#111110] hover:border-[#C17F3E] transition-all duration-300">
                     Telegram
                   </a>
-                  <a
-                    href="https://instagram.com/lednev_sk"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="border border-[#D8D3C9] px-4 py-2 text-xs tracking-widest uppercase hover:bg-[#1A1A1A] hover:text-[#F5F3EF] hover:border-[#1A1A1A] transition-all duration-300"
-                  >
+                  <a href="https://instagram.com/lednev_sk" target="_blank" rel="noopener noreferrer"
+                    className="border border-[#2A2825] text-[#E8E4DE] px-4 py-2 text-xs tracking-widest uppercase hover:bg-[#C17F3E] hover:text-[#111110] hover:border-[#C17F3E] transition-all duration-300">
                     Instagram
                   </a>
                 </div>
               </div>
-              <div className="bg-[#1A1A1A] p-10">
-                <p className="font-cormorant text-3xl text-[#F5F3EF] font-light mb-2">Обсудим ваш проект?</p>
+
+              <div className="border border-[#2A2825] p-10 relative">
+                {/* угловой акцент */}
+                <div className="absolute -top-px -right-px w-12 h-12 border-t-2 border-r-2 border-[#C17F3E]" />
+                <div className="absolute -bottom-px -left-px w-12 h-12 border-b-2 border-l-2 border-[#C17F3E]" />
+                <p className="font-golos text-2xl text-[#E8E4DE] font-bold uppercase mb-2">Обсудим проект?</p>
                 <p className="text-[#6B6560] text-sm font-light mb-8">Оставьте заявку — свяжемся в течение часа</p>
-                <div className="space-y-4">
+                <div className="space-y-5">
                   <input
                     type="text"
                     placeholder="Ваше имя"
-                    className="w-full bg-transparent border-b border-[#333] py-3 text-[#F5F3EF] placeholder-[#555] text-sm focus:outline-none focus:border-[#8B7355] transition-colors font-golos font-light"
+                    className="w-full bg-transparent border-b border-[#2A2825] py-3 text-[#E8E4DE] placeholder-[#3A3835] text-sm focus:outline-none focus:border-[#C17F3E] transition-colors font-golos font-light"
                   />
                   <input
                     type="tel"
                     placeholder="Телефон"
-                    className="w-full bg-transparent border-b border-[#333] py-3 text-[#F5F3EF] placeholder-[#555] text-sm focus:outline-none focus:border-[#8B7355] transition-colors font-golos font-light"
+                    className="w-full bg-transparent border-b border-[#2A2825] py-3 text-[#E8E4DE] placeholder-[#3A3835] text-sm focus:outline-none focus:border-[#C17F3E] transition-colors font-golos font-light"
                   />
                   <textarea
                     placeholder="Описание объекта"
                     rows={3}
-                    className="w-full bg-transparent border-b border-[#333] py-3 text-[#F5F3EF] placeholder-[#555] text-sm focus:outline-none focus:border-[#8B7355] transition-colors resize-none font-golos font-light"
+                    className="w-full bg-transparent border-b border-[#2A2825] py-3 text-[#E8E4DE] placeholder-[#3A3835] text-sm focus:outline-none focus:border-[#C17F3E] transition-colors resize-none font-golos font-light"
                   />
                 </div>
-                <button className="mt-8 w-full bg-[#8B7355] text-[#F5F3EF] py-4 text-xs tracking-[0.2em] uppercase hover:bg-[#7A6345] transition-colors duration-300">
+                <button className="mt-8 w-full bg-[#C17F3E] text-[#111110] py-4 text-xs tracking-[0.25em] uppercase font-bold hover:bg-[#D4913F] transition-colors duration-300">
                   Отправить заявку
                 </button>
               </div>
@@ -360,10 +384,10 @@ export default function Index() {
       </section>
 
       {/* FOOTER */}
-      <footer className="border-t border-[#D8D3C9] py-8">
+      <footer className="border-t border-[#2A2825] py-8 bg-[#111110]">
         <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
-          <img src={LOGO} alt="Леднев Строительная компания" className="h-7 w-auto" />
-          <p className="text-xs text-[#9E9891] tracking-widest">© 2024 — Все права защищены</p>
+          <img src={LOGO_WHITE} alt="Леднев Строительная компания" className="h-7 w-auto brightness-0 invert" />
+          <p className="text-xs text-[#3A3835] tracking-widest uppercase">© 2024 — Все права защищены</p>
         </div>
       </footer>
     </div>
