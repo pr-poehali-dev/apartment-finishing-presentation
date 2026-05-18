@@ -356,9 +356,9 @@ export default function Index() {
               <div className="w-8 h-px bg-[#9A9A96]" />
               <p className="text-xs tracking-[0.3em] uppercase text-[#9A9A96]">Строительная компания — Краснодар</p>
             </div>
-            <h1 className="font-golos text-[clamp(2.8rem,7vw,6.5rem)] font-medium leading-[0.88] mb-8 animate-fade-in uppercase tracking-tight" style={{ animationDelay: "0.1s" }}>
+            <h1 className="font-golos text-[clamp(2.4rem,5.5vw,5.5rem)] font-medium leading-[0.92] mb-8 animate-fade-in uppercase tracking-tight" style={{ animationDelay: "0.1s" }}>
               Строим.<br />
-              <span className="text-[#9A9A96]">Отделываем.</span><br />
+              <span className="text-[#9A9A96]">Чистовая<br />отделка.</span><br />
               Сдаём.
             </h1>
             <p className="text-[#6B6560] text-base leading-relaxed max-w-sm mb-10 animate-fade-in font-light" style={{ animationDelay: "0.2s" }}>
@@ -381,13 +381,8 @@ export default function Index() {
           </div>
           <div className="relative animate-fade-in" style={{ animationDelay: "0.15s" }}>
             <div className="aspect-[4/5] overflow-hidden">
-              <img src={IMG_FACADE_1} alt="Объект после отделки" className="w-full h-full object-cover grayscale contrast-110" />
-              {/* металлическая рамка */}
+              <img src={IMG_OBJ3_POOL} alt="Объект после отделки" className="w-full h-full object-cover grayscale contrast-110" />
               <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
-            </div>
-            <div className="absolute -bottom-4 -left-4 bg-[#9A9A96] text-[#111110] p-5">
-              <p className="font-golos text-4xl font-bold">500+</p>
-              <p className="text-xs tracking-[0.15em] uppercase mt-1 font-medium">Проектов</p>
             </div>
             {/* декоративный угол */}
             <div className="absolute -top-3 -right-3 w-12 h-12 border-t-2 border-r-2 border-[#9A9A96]" />
