@@ -155,8 +155,8 @@ const ALL_PORTFOLIO = [
 
 function PhotoItem({ src, label, onClick }: { src: string; label: string; onClick: () => void }) {
   return (
-    <div className="overflow-hidden relative cursor-zoom-in group" onClick={onClick}>
-      <img src={src} alt={label} className="w-full h-full object-contain bg-[#0D0D0C] grayscale group-hover:grayscale-0 transition-all duration-700" />
+    <div className="overflow-hidden relative cursor-zoom-in group h-full w-full" onClick={onClick}>
+      <img src={src} alt={label} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
       <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
       <div className="absolute bottom-3 left-3 bg-[#111110]/80 px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
         <p className="text-xs tracking-widest uppercase text-[#9A9A96]">{label}</p>
