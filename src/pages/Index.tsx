@@ -381,7 +381,7 @@ export default function Index() {
           </div>
           <div className="relative animate-fade-in" style={{ animationDelay: "0.15s" }}>
             <div className="aspect-[4/5] overflow-hidden">
-              <img src={IMG_OBJ3_POOL} alt="Объект после отделки" className="w-full h-full object-cover grayscale contrast-110" />
+              <img src={IMG_OBJ3_LIVING} alt="Объект после отделки" className="w-full h-full object-cover grayscale contrast-110" />
               <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
             </div>
             {/* декоративный угол */}
