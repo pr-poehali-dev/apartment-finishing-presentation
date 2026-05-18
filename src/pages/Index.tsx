@@ -406,7 +406,7 @@ export default function Index() {
               <div className="grid md:grid-cols-2 gap-10">
                 <div>
                   <p className="text-[#6B6560] leading-relaxed font-light text-sm">
-                    Компания основана в 2014 году командой профессионалов с многолетним опытом в строительстве. За это время мы прошли путь от небольшой бригады до полноценной строительной компании с собственным штатом специалистов.
+                    Компания основана в 2011 году командой профессионалов с многолетним опытом в строительстве. За это время мы прошли путь от небольшой бригады до полноценной строительной компании с собственным штатом специалистов.
                   </p>
                 </div>
                 <div>
@@ -415,12 +415,11 @@ export default function Index() {
                   </p>
                 </div>
                 <div className="border-l-2 border-[#9A9A96] pl-4">
-                  <p className="font-golos text-4xl font-bold text-[#E8E4DE]">10+</p>
+                  <p className="font-golos text-4xl font-bold text-[#E8E4DE]">14</p>
                   <p className="text-xs tracking-widest uppercase text-[#6B6560] mt-1">лет на рынке</p>
                 </div>
                 <div className="border-l-2 border-[#2A2825] pl-4">
-                  <p className="font-golos text-4xl font-bold text-[#E8E4DE]">500+</p>
-                  <p className="text-xs tracking-widest uppercase text-[#6B6560] mt-1">завершённых объектов</p>
+                  <p className="font-golos text-sm font-medium text-[#E8E4DE] leading-relaxed">Гарантия качества<br />на все виды работ</p>
                 </div>
               </div>
             </div>
