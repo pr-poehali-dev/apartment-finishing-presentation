@@ -12,6 +12,12 @@ const IMG_FACADE_2 = "https://cdn.poehali.dev/files/aea095e3-241d-4f98-b398-6355
 const IMG_POOL = "https://cdn.poehali.dev/files/efb71f82-fc45-4a7c-a4b0-a72e80cc18b5.png";
 // Объект 3 — кухня-столовая с рейками
 const IMG_KITCHEN = "https://cdn.poehali.dev/files/bd7310fe-9023-45d7-8a7b-0d7fa6bb946c.png";
+// Объект 4 — арка в кухню-столовую
+const IMG_ARCH = "https://cdn.poehali.dev/files/6f0e69bb-ea97-4afb-86fd-f2d4114103fb.png";
+// Объект 4 — ванная с золотыми деталями и ванной
+const IMG_BATH_GOLD = "https://cdn.poehali.dev/files/3a501fc3-488b-4415-a059-4acc09f6fc7a.png";
+// Объект 4 — спальня с лепниной
+const IMG_BEDROOM = "https://cdn.poehali.dev/files/beba225e-1d85-45ae-9a36-e67d73087bb8.png";
 const LOGO_WHITE = "https://cdn.poehali.dev/projects/830044c3-63d5-4b40-9cea-c9639af22500/bucket/55e40c34-2198-4782-8615-21b1fb699e9b.png";
 
 function useInView(threshold = 0.12) {
@@ -259,8 +265,8 @@ export default function Index() {
                 </div>
               </div>
             </div>
-            {/* Строка 2: три равных фото */}
-            <div className="grid md:grid-cols-3 gap-1">
+            {/* Строка 2: три равных фото — объект 1 продолжение */}
+            <div className="grid md:grid-cols-3 gap-1 mb-1">
               <div className="aspect-[4/3] overflow-hidden relative">
                 <img src={IMG_FACADE_1} alt="Фасад, вид 1" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
                 <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
@@ -280,6 +286,36 @@ export default function Index() {
                 <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
                 <div className="absolute bottom-4 left-4 bg-[#111110]/80 px-3 py-1.5">
                   <p className="text-xs tracking-widest uppercase text-[#9A9A96]">Кухня</p>
+                </div>
+              </div>
+            </div>
+            {/* Разделитель объекта */}
+            <div className="flex items-center gap-4 my-6">
+              <div className="flex-1 h-px bg-[#2A2825]" />
+              <p className="text-xs tracking-[0.25em] uppercase text-[#3A3835]">Объект 2</p>
+              <div className="flex-1 h-px bg-[#2A2825]" />
+            </div>
+            {/* Строка 3: объект 2 — большое фото арки + два маленьких */}
+            <div className="grid md:grid-cols-3 gap-1">
+              <div className="md:col-span-1 aspect-[4/3] overflow-hidden relative">
+                <img src={IMG_ARCH} alt="Арка в столовую" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
+                <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
+                <div className="absolute bottom-4 left-4 bg-[#111110]/80 px-3 py-1.5">
+                  <p className="text-xs tracking-widest uppercase text-[#9A9A96]">Столовая</p>
+                </div>
+              </div>
+              <div className="aspect-[4/3] overflow-hidden relative">
+                <img src={IMG_BATH_GOLD} alt="Ванная с золотом" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
+                <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
+                <div className="absolute bottom-4 left-4 bg-[#111110]/80 px-3 py-1.5">
+                  <p className="text-xs tracking-widest uppercase text-[#9A9A96]">Ванная</p>
+                </div>
+              </div>
+              <div className="aspect-[4/3] overflow-hidden relative">
+                <img src={IMG_BEDROOM} alt="Спальня" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
+                <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
+                <div className="absolute bottom-4 left-4 bg-[#111110]/80 px-3 py-1.5">
+                  <p className="text-xs tracking-widest uppercase text-[#9A9A96]">Спальня</p>
                 </div>
               </div>
             </div>
