@@ -34,6 +34,12 @@ const IMG_OBJ3_WARDROBE = "https://cdn.poehali.dev/files/418713a4-b5fc-4272-b8ad
 const IMG_OBJ3_LIVING = "https://cdn.poehali.dev/files/53e063a6-d321-49ef-b915-0cf4df28a919.png";
 // Объект 3 — кабинет с диваном
 const IMG_OBJ3_OFFICE = "https://cdn.poehali.dev/files/a7e87048-59ec-46aa-a644-8569dd9e111b.png";
+// Объект 4 — гостиная с балками и камином
+const IMG_OBJ4_LIVING = "https://cdn.poehali.dev/files/3d360014-bede-432b-9721-1fcf8dd1403f.png";
+// Объект 4 — фасад дома с садом
+const IMG_OBJ4_FACADE = "https://cdn.poehali.dev/files/406999df-a1a5-4918-9b1e-9a662fa5abc5.png";
+// Объект 4 — баня с деревянными стенами
+const IMG_OBJ4_SAUNA = "https://cdn.poehali.dev/files/d932e215-c891-4b0f-ac16-3816495ae5e3.png";
 const LOGO_WHITE = "https://cdn.poehali.dev/projects/830044c3-63d5-4b40-9cea-c9639af22500/bucket/55e40c34-2198-4782-8615-21b1fb699e9b.png";
 
 function useInView(threshold = 0.12) {
@@ -385,6 +391,40 @@ export default function Index() {
                 <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
                 <div className="absolute bottom-4 left-4 bg-[#111110]/80 px-3 py-1.5">
                   <p className="text-xs tracking-widest uppercase text-[#9A9A96]">Кабинет</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Разделитель объект 4 */}
+            <div className="flex items-center gap-4 my-6">
+              <div className="flex-1 h-px bg-[#2A2825]" />
+              <p className="text-xs tracking-[0.25em] uppercase text-[#3A3835]">Объект 4</p>
+              <div className="flex-1 h-px bg-[#2A2825]" />
+            </div>
+
+            {/* Объект 4 — фасад широко + гостиная + баня */}
+            <div className="grid md:grid-cols-3 gap-1">
+              <div className="md:col-span-2 aspect-[16/9] overflow-hidden relative">
+                <img src={IMG_OBJ4_FACADE} alt="Фасад с садом" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
+                <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
+                <div className="absolute bottom-4 left-4 bg-[#111110]/80 px-3 py-1.5">
+                  <p className="text-xs tracking-widest uppercase text-[#9A9A96]">Фасад</p>
+                </div>
+              </div>
+              <div className="grid grid-rows-2 gap-1">
+                <div className="overflow-hidden relative">
+                  <img src={IMG_OBJ4_LIVING} alt="Гостиная с балками" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
+                  <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
+                  <div className="absolute bottom-3 left-3 bg-[#111110]/80 px-2 py-1">
+                    <p className="text-xs tracking-widest uppercase text-[#9A9A96]">Гостиная</p>
+                  </div>
+                </div>
+                <div className="overflow-hidden relative">
+                  <img src={IMG_OBJ4_SAUNA} alt="Баня" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
+                  <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
+                  <div className="absolute bottom-3 left-3 bg-[#111110]/80 px-2 py-1">
+                    <p className="text-xs tracking-widest uppercase text-[#9A9A96]">Баня</p>
+                  </div>
                 </div>
               </div>
             </div>
