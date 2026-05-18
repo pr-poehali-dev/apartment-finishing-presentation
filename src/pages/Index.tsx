@@ -292,9 +292,9 @@ export default function Index() {
                 <h2 className="font-cormorant text-5xl font-light mb-8">Контакты</h2>
                 <div className="space-y-6">
                   {[
-                    { icon: "Phone", label: "Телефон", value: "+7 (999) 000-00-00" },
-                    { icon: "Mail", label: "Почта", value: "info@company.ru" },
-                    { icon: "MapPin", label: "Адрес", value: "Москва, ул. Примерная, д. 1" },
+                    { icon: "Phone", label: "Телефон", value: "+7 (964) 900-44-66", href: "tel:+79649004466" },
+                    { icon: "Mail", label: "Почта", value: "89649004466@mail.ru", href: "mailto:89649004466@mail.ru" },
+                    { icon: "MapPin", label: "Адрес", value: "г. Краснодар, ул. Ростовское шоссе 30/3, ТЦ «Грани», 2 этаж", href: null },
                   ].map((c) => (
                     <div key={c.label} className="flex items-start gap-4 border-b border-[#D8D3C9] pb-6">
                       <div className="w-9 h-9 border border-[#D8D3C9] flex items-center justify-center shrink-0 mt-0.5">
@@ -302,17 +302,32 @@ export default function Index() {
                       </div>
                       <div>
                         <p className="text-xs tracking-widest uppercase text-[#9E9891] mb-1">{c.label}</p>
-                        <p className="text-[#1A1A1A] font-light">{c.value}</p>
+                        {c.href ? (
+                          <a href={c.href} className="text-[#1A1A1A] font-light hover:text-[#8B7355] transition-colors">{c.value}</a>
+                        ) : (
+                          <p className="text-[#1A1A1A] font-light">{c.value}</p>
+                        )}
                       </div>
                     </div>
                   ))}
                 </div>
                 <div className="flex gap-3 mt-8">
-                  {["Telegram", "Instagram", "Youtube"].map((net) => (
-                    <button key={net} className="border border-[#D8D3C9] px-4 py-2 text-xs tracking-widest uppercase hover:bg-[#1A1A1A] hover:text-[#F5F3EF] hover:border-[#1A1A1A] transition-all duration-300">
-                      {net}
-                    </button>
-                  ))}
+                  <a
+                    href="https://t.me/+79649004466"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="border border-[#D8D3C9] px-4 py-2 text-xs tracking-widest uppercase hover:bg-[#1A1A1A] hover:text-[#F5F3EF] hover:border-[#1A1A1A] transition-all duration-300"
+                  >
+                    Telegram
+                  </a>
+                  <a
+                    href="https://instagram.com/lednev_sk"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="border border-[#D8D3C9] px-4 py-2 text-xs tracking-widest uppercase hover:bg-[#1A1A1A] hover:text-[#F5F3EF] hover:border-[#1A1A1A] transition-all duration-300"
+                  >
+                    Instagram
+                  </a>
                 </div>
               </div>
               <div className="bg-[#1A1A1A] p-10">
