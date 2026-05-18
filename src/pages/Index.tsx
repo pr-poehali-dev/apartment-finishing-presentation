@@ -98,8 +98,94 @@ const advantages = [
   { icon: "Star", title: "Сотни клиентов", desc: "Более 80% заказчиков возвращаются к нам снова" },
 ];
 
+// Все фото портфолио в порядке для лайтбокса
+const ALL_PORTFOLIO = [
+  { src: IMG_POOL, label: "Бассейн" },
+  { src: IMG_BATHROOM, label: "Ванная" },
+  { src: IMG_FACADE_1, label: "Фасад" },
+  { src: IMG_FACADE_2, label: "Терраса" },
+  { src: IMG_OBJ1_GYM, label: "Фитнес-зал" },
+  { src: IMG_OBJ1_HAMMAM, label: "Хаммам" },
+  { src: IMG_KITCHEN, label: "Кухня-столовая" },
+  { src: IMG_ARCH, label: "Столовая" },
+  { src: IMG_BATH_GOLD, label: "Ванная" },
+  { src: IMG_BEDROOM, label: "Спальня" },
+  { src: IMG_OBJ3_POOL, label: "Бассейн" },
+  { src: IMG_OBJ3_LIVING, label: "Гостиная" },
+  { src: IMG_OBJ3_KITCHEN, label: "Кухня" },
+  { src: IMG_OBJ3_WARDROBE, label: "Гардеробная" },
+  { src: IMG_OBJ3_TROPIC, label: "Ванная" },
+  { src: IMG_OBJ3_BATH_YELLOW, label: "Санузел" },
+  { src: IMG_OBJ3_BEDROOM, label: "Спальня" },
+  { src: IMG_OBJ3_OFFICE, label: "Кабинет" },
+  { src: IMG_OBJ4_FACADE, label: "Фасад" },
+  { src: IMG_OBJ4_LIVING, label: "Гостиная" },
+  { src: IMG_OBJ4_SAUNA, label: "Баня" },
+];
+
+function PhotoItem({ src, label, onClick }: { src: string; label: string; onClick: () => void }) {
+  return (
+    <div className="overflow-hidden relative cursor-zoom-in group" onClick={onClick}>
+      <img src={src} alt={label} className="w-full h-full object-contain bg-[#0D0D0C] grayscale group-hover:grayscale-0 transition-all duration-700" />
+      <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
+      <div className="absolute bottom-3 left-3 bg-[#111110]/80 px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <p className="text-xs tracking-widest uppercase text-[#9A9A96]">{label}</p>
+      </div>
+      <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div className="w-7 h-7 bg-[#111110]/80 flex items-center justify-center">
+          <Icon name="Maximize2" size={12} className="text-[#9A9A96]" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Lightbox({ images, index, onClose, onPrev, onNext }: {
+  images: typeof ALL_PORTFOLIO;
+  index: number;
+  onClose: () => void;
+  onPrev: () => void;
+  onNext: () => void;
+}) {
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft") onPrev();
+      if (e.key === "ArrowRight") onNext();
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [onClose, onPrev, onNext]);
+
+  return (
+    <div className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center" onClick={onClose}>
+      <button className="absolute top-4 right-4 text-[#9A9A96] hover:text-white transition-colors" onClick={onClose}>
+        <Icon name="X" size={28} />
+      </button>
+      <button className="absolute left-4 top-1/2 -translate-y-1/2 text-[#9A9A96] hover:text-white transition-colors p-2" onClick={(e) => { e.stopPropagation(); onPrev(); }}>
+        <Icon name="ChevronLeft" size={36} />
+      </button>
+      <button className="absolute right-4 top-1/2 -translate-y-1/2 text-[#9A9A96] hover:text-white transition-colors p-2" onClick={(e) => { e.stopPropagation(); onNext(); }}>
+        <Icon name="ChevronRight" size={36} />
+      </button>
+      <div className="max-w-5xl max-h-[90vh] w-full px-16" onClick={(e) => e.stopPropagation()}>
+        <img src={images[index].src} alt={images[index].label} className="w-full h-full object-contain max-h-[80vh]" />
+        <p className="text-center text-xs tracking-[0.2em] uppercase text-[#9A9A96] mt-4">
+          {images[index].label} · {index + 1} / {images.length}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export default function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  const openLightbox = (idx: number) => setLightboxIndex(idx);
+  const closeLightbox = () => setLightboxIndex(null);
+  const prevPhoto = () => setLightboxIndex(i => i !== null ? (i - 1 + ALL_PORTFOLIO.length) % ALL_PORTFOLIO.length : null);
+  const nextPhoto = () => setLightboxIndex(i => i !== null ? (i + 1) % ALL_PORTFOLIO.length : null);
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -108,6 +194,9 @@ export default function Index() {
 
   return (
     <div className="bg-[#111110] text-[#E8E4DE] font-golos min-h-screen">
+      {lightboxIndex !== null && (
+        <Lightbox images={ALL_PORTFOLIO} index={lightboxIndex} onClose={closeLightbox} onPrev={prevPhoto} onNext={nextPhoto} />
+      )}
 
       {/* NAV */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#111110]/95 backdrop-blur-sm border-b border-[#2A2825]">
@@ -278,186 +367,80 @@ export default function Index() {
             <div className="mb-3">
               <div className="flex items-center gap-4 mb-3">
                 <div className="w-5 h-px bg-[#9A9A96]" />
-                <div>
-                  <p className="text-[#9A9A96] text-xs tracking-[0.2em] uppercase">Объект 01</p>
-                  <p className="text-[#E8E4DE] text-sm font-medium mt-0.5">СПА-комплекс частного дома · Горячий Ключ</p>
-                </div>
+                <p className="text-[#E8E4DE] text-sm font-medium">СПА-комплекс частного дома · Горячий Ключ</p>
               </div>
+              {/* Объект 1 — строка 1 */}
               <div className="grid md:grid-cols-3 gap-1 mb-1">
-                <div className="md:col-span-2 aspect-[16/9] overflow-hidden relative">
-                  <img src={IMG_POOL} alt="Бассейн" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
-                  <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
-                  <div className="absolute bottom-4 left-4 bg-[#111110]/80 px-3 py-1.5"><p className="text-xs tracking-widest uppercase text-[#9A9A96]">Бассейн</p></div>
-                </div>
-                <div className="aspect-[16/9] md:aspect-auto overflow-hidden relative">
-                  <img src={IMG_BATHROOM} alt="Ванная" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
-                  <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
-                  <div className="absolute bottom-4 left-4 bg-[#111110]/80 px-3 py-1.5"><p className="text-xs tracking-widest uppercase text-[#9A9A96]">Ванная</p></div>
-                </div>
+                <div className="md:col-span-2 aspect-[16/9]"><PhotoItem src={IMG_POOL} label="Бассейн" onClick={() => openLightbox(0)} /></div>
+                <div className="aspect-[16/9]"><PhotoItem src={IMG_BATHROOM} label="Ванная" onClick={() => openLightbox(1)} /></div>
               </div>
+              {/* Объект 1 — строка 2 */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-1 mb-1">
-                {[
-                  { src: IMG_FACADE_1, label: "Фасад" },
-                  { src: IMG_FACADE_2, label: "Терраса" },
-                  { src: IMG_OBJ1_GYM, label: "Фитнес-зал" },
-                  { src: IMG_OBJ1_HAMMAM, label: "Хаммам" },
-                ].map(item => (
-                  <div key={item.label} className="aspect-[4/3] overflow-hidden relative">
-                    <img src={item.src} alt={item.label} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
-                    <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
-                    <div className="absolute bottom-3 left-3 bg-[#111110]/80 px-2 py-1"><p className="text-xs tracking-widest uppercase text-[#9A9A96]">{item.label}</p></div>
-                  </div>
-                ))}
+                <div className="aspect-[4/3]"><PhotoItem src={IMG_FACADE_1} label="Фасад" onClick={() => openLightbox(2)} /></div>
+                <div className="aspect-[4/3]"><PhotoItem src={IMG_FACADE_2} label="Терраса" onClick={() => openLightbox(3)} /></div>
+                <div className="aspect-[4/3]"><PhotoItem src={IMG_OBJ1_GYM} label="Фитнес-зал" onClick={() => openLightbox(4)} /></div>
+                <div className="aspect-[4/3]"><PhotoItem src={IMG_OBJ1_HAMMAM} label="Хаммам" onClick={() => openLightbox(5)} /></div>
               </div>
-              <div className="aspect-[21/9] overflow-hidden relative">
-                <img src={IMG_KITCHEN} alt="Кухня-столовая" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
-                <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
-                <div className="absolute bottom-4 left-4 bg-[#111110]/80 px-3 py-1.5"><p className="text-xs tracking-widest uppercase text-[#9A9A96]">Кухня-столовая</p></div>
-              </div>
+              {/* Объект 1 — кухня */}
+              <div className="aspect-[21/9]"><PhotoItem src={IMG_KITCHEN} label="Кухня-столовая" onClick={() => openLightbox(6)} /></div>
             </div>
 
             {/* Разделитель */}
             <div className="flex items-center gap-4 my-8">
-              <div className="flex-1 h-px bg-[#2A2825]" />
-              <div className="w-1.5 h-1.5 bg-[#9A9A96] rotate-45" />
-              <div className="flex-1 h-px bg-[#2A2825]" />
+              <div className="flex-1 h-px bg-[#2A2825]" /><div className="w-1.5 h-1.5 bg-[#9A9A96] rotate-45" /><div className="flex-1 h-px bg-[#2A2825]" />
             </div>
 
             {/* ── ОБЪЕКТ 2 ── */}
             <div className="flex items-center gap-4 mb-3">
               <div className="w-5 h-px bg-[#9A9A96]" />
-              <div>
-                <p className="text-[#9A9A96] text-xs tracking-[0.2em] uppercase">Объект 02</p>
-                <p className="text-[#E8E4DE] text-sm font-medium mt-0.5">Частный дом · пос. Северный, Краснодар</p>
-              </div>
+              <p className="text-[#E8E4DE] text-sm font-medium">Частный дом · пос. Северный, Краснодар</p>
             </div>
-            {/* Объект 2 — три фото */}
             <div className="grid md:grid-cols-3 gap-1 mb-1">
-              {[
-                { src: IMG_ARCH, alt: "Столовая", label: "Столовая" },
-                { src: IMG_BATH_GOLD, alt: "Ванная с золотом", label: "Ванная" },
-                { src: IMG_BEDROOM, alt: "Спальня", label: "Спальня" },
-              ].map((item) => (
-                <div key={item.alt} className="aspect-[4/3] overflow-hidden relative">
-                  <img src={item.src} alt={item.alt} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
-                  <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
-                  <div className="absolute bottom-4 left-4 bg-[#111110]/80 px-3 py-1.5">
-                    <p className="text-xs tracking-widest uppercase text-[#9A9A96]">{item.label}</p>
-                  </div>
-                </div>
-              ))}
+              <div className="aspect-[4/3]"><PhotoItem src={IMG_ARCH} label="Столовая" onClick={() => openLightbox(7)} /></div>
+              <div className="aspect-[4/3]"><PhotoItem src={IMG_BATH_GOLD} label="Ванная" onClick={() => openLightbox(8)} /></div>
+              <div className="aspect-[4/3]"><PhotoItem src={IMG_BEDROOM} label="Спальня" onClick={() => openLightbox(9)} /></div>
             </div>
 
             {/* Разделитель */}
             <div className="flex items-center gap-4 my-8">
-              <div className="flex-1 h-px bg-[#2A2825]" />
-              <div className="w-1.5 h-1.5 bg-[#9A9A96] rotate-45" />
-              <div className="flex-1 h-px bg-[#2A2825]" />
+              <div className="flex-1 h-px bg-[#2A2825]" /><div className="w-1.5 h-1.5 bg-[#9A9A96] rotate-45" /><div className="flex-1 h-px bg-[#2A2825]" />
             </div>
 
             {/* ── ОБЪЕКТ 3 ── */}
             <div className="flex items-center gap-4 mb-3">
               <div className="w-5 h-px bg-[#9A9A96]" />
-              <div>
-                <p className="text-[#9A9A96] text-xs tracking-[0.2em] uppercase">Объект 03</p>
-                <p className="text-[#E8E4DE] text-sm font-medium mt-0.5">Частный дом · ФМР, Краснодар</p>
-              </div>
+              <p className="text-[#E8E4DE] text-sm font-medium">Частный дом · ФМР, Краснодар</p>
             </div>
-
-            {/* Объект 3 — строка 1: бассейн широко + гостиная */}
             <div className="grid md:grid-cols-3 gap-1 mb-1">
-              <div className="md:col-span-2 aspect-[16/9] overflow-hidden relative">
-                <img src={IMG_OBJ3_POOL} alt="Бассейн с мрамором" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
-                <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
-                <div className="absolute bottom-4 left-4 bg-[#111110]/80 px-3 py-1.5">
-                  <p className="text-xs tracking-widest uppercase text-[#9A9A96]">Бассейн</p>
-                </div>
-              </div>
-              <div className="aspect-[16/9] md:aspect-auto overflow-hidden relative">
-                <img src={IMG_OBJ3_LIVING} alt="Гостиная с камином" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
-                <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
-                <div className="absolute bottom-4 left-4 bg-[#111110]/80 px-3 py-1.5">
-                  <p className="text-xs tracking-widest uppercase text-[#9A9A96]">Гостиная</p>
-                </div>
-              </div>
+              <div className="md:col-span-2 aspect-[16/9]"><PhotoItem src={IMG_OBJ3_POOL} label="Бассейн" onClick={() => openLightbox(10)} /></div>
+              <div className="aspect-[16/9]"><PhotoItem src={IMG_OBJ3_LIVING} label="Гостиная" onClick={() => openLightbox(11)} /></div>
             </div>
-
-            {/* Объект 3 — строка 2: 4 фото равными */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-1">
-              {[
-                { src: IMG_OBJ3_KITCHEN, label: "Кухня" },
-                { src: IMG_OBJ3_WARDROBE, label: "Гардеробная" },
-                { src: IMG_OBJ3_TROPIC, label: "Ванная" },
-                { src: IMG_OBJ3_BATH_YELLOW, label: "Санузел" },
-              ].map((item) => (
-                <div key={item.label} className="aspect-square overflow-hidden relative">
-                  <img src={item.src} alt={item.label} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
-                  <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
-                  <div className="absolute bottom-3 left-3 bg-[#111110]/80 px-2 py-1">
-                    <p className="text-xs tracking-widest uppercase text-[#9A9A96]">{item.label}</p>
-                  </div>
-                </div>
-              ))}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-1 mb-1">
+              <div className="aspect-square"><PhotoItem src={IMG_OBJ3_KITCHEN} label="Кухня" onClick={() => openLightbox(12)} /></div>
+              <div className="aspect-square"><PhotoItem src={IMG_OBJ3_WARDROBE} label="Гардеробная" onClick={() => openLightbox(13)} /></div>
+              <div className="aspect-square"><PhotoItem src={IMG_OBJ3_TROPIC} label="Ванная" onClick={() => openLightbox(14)} /></div>
+              <div className="aspect-square"><PhotoItem src={IMG_OBJ3_BATH_YELLOW} label="Санузел" onClick={() => openLightbox(15)} /></div>
             </div>
-
-            {/* Объект 3 — строка 3: спальня + кабинет */}
-            <div className="grid md:grid-cols-2 gap-1 mt-1">
-              <div className="aspect-[4/3] overflow-hidden relative">
-                <img src={IMG_OBJ3_BEDROOM} alt="Спальня с птицами" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
-                <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
-                <div className="absolute bottom-4 left-4 bg-[#111110]/80 px-3 py-1.5">
-                  <p className="text-xs tracking-widest uppercase text-[#9A9A96]">Спальня</p>
-                </div>
-              </div>
-              <div className="aspect-[4/3] overflow-hidden relative">
-                <img src={IMG_OBJ3_OFFICE} alt="Кабинет" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
-                <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
-                <div className="absolute bottom-4 left-4 bg-[#111110]/80 px-3 py-1.5">
-                  <p className="text-xs tracking-widest uppercase text-[#9A9A96]">Кабинет</p>
-                </div>
-              </div>
+            <div className="grid md:grid-cols-2 gap-1">
+              <div className="aspect-[4/3]"><PhotoItem src={IMG_OBJ3_BEDROOM} label="Спальня" onClick={() => openLightbox(16)} /></div>
+              <div className="aspect-[4/3]"><PhotoItem src={IMG_OBJ3_OFFICE} label="Кабинет" onClick={() => openLightbox(17)} /></div>
             </div>
 
             {/* Разделитель */}
             <div className="flex items-center gap-4 my-8">
-              <div className="flex-1 h-px bg-[#2A2825]" />
-              <div className="w-1.5 h-1.5 bg-[#9A9A96] rotate-45" />
-              <div className="flex-1 h-px bg-[#2A2825]" />
+              <div className="flex-1 h-px bg-[#2A2825]" /><div className="w-1.5 h-1.5 bg-[#9A9A96] rotate-45" /><div className="flex-1 h-px bg-[#2A2825]" />
             </div>
 
             {/* ── ОБЪЕКТ 4 ── */}
             <div className="flex items-center gap-4 mb-3">
               <div className="w-5 h-px bg-[#9A9A96]" />
-              <div>
-                <p className="text-[#9A9A96] text-xs tracking-[0.2em] uppercase">Объект 04</p>
-                <p className="text-[#E8E4DE] text-sm font-medium mt-0.5">Пристройка: комната отдыха, русская баня и бассейн</p>
-              </div>
+              <p className="text-[#E8E4DE] text-sm font-medium">Пристройка: комната отдыха, русская баня и бассейн</p>
             </div>
-
-            {/* Объект 4 — фасад широко + гостиная + баня */}
             <div className="grid md:grid-cols-3 gap-1">
-              <div className="md:col-span-2 aspect-[16/9] overflow-hidden relative">
-                <img src={IMG_OBJ4_FACADE} alt="Фасад с садом" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
-                <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
-                <div className="absolute bottom-4 left-4 bg-[#111110]/80 px-3 py-1.5">
-                  <p className="text-xs tracking-widest uppercase text-[#9A9A96]">Фасад</p>
-                </div>
-              </div>
+              <div className="md:col-span-2 aspect-[16/9]"><PhotoItem src={IMG_OBJ4_FACADE} label="Фасад" onClick={() => openLightbox(18)} /></div>
               <div className="grid grid-rows-2 gap-1">
-                <div className="overflow-hidden relative">
-                  <img src={IMG_OBJ4_LIVING} alt="Гостиная с балками" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
-                  <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
-                  <div className="absolute bottom-3 left-3 bg-[#111110]/80 px-2 py-1">
-                    <p className="text-xs tracking-widest uppercase text-[#9A9A96]">Гостиная</p>
-                  </div>
-                </div>
-                <div className="overflow-hidden relative">
-                  <img src={IMG_OBJ4_SAUNA} alt="Баня" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
-                  <div className="absolute inset-0 border border-[#2A2825] pointer-events-none" />
-                  <div className="absolute bottom-3 left-3 bg-[#111110]/80 px-2 py-1">
-                    <p className="text-xs tracking-widest uppercase text-[#9A9A96]">Баня</p>
-                  </div>
-                </div>
+                <div className="aspect-[16/9] md:aspect-auto"><PhotoItem src={IMG_OBJ4_LIVING} label="Гостиная" onClick={() => openLightbox(19)} /></div>
+                <div className="aspect-[16/9] md:aspect-auto"><PhotoItem src={IMG_OBJ4_SAUNA} label="Баня" onClick={() => openLightbox(20)} /></div>
               </div>
             </div>
           </Section>
